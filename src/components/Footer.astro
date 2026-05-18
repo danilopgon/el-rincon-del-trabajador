@@ -1,0 +1,75 @@
+---
+import Icon from './icons/Icon.astro';
+import { CONTACT } from '../lib/contact';
+---
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__top">
+      <!-- Brand column -->
+      <div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <img src="/logo-marca.png" alt="El Rincón del Trabajador" width="45" height="64" />
+          <div style="line-height:0.95">
+            <div style="font-family:var(--font-display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:0.02em;color:var(--color-cream)">El Rincón</div>
+            <div style="font-family:var(--font-display);font-weight:600;font-size:13px;letter-spacing:0.2em;color:var(--color-gold);text-transform:uppercase;margin-top:4px">del Trabajador</div>
+          </div>
+        </div>
+        <p class="ftr__brand-text">
+          Vestuario laboral, EPI certificado y personalización con bordado y
+          DTF. Tarancón, Cuenca · 15 años de oficio en el sector.
+        </p>
+      </div>
+      <!-- Servicios column -->
+      <div>
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#servicios">Ropa de trabajo</a></li>
+          <li><a href="#servicios">EPI certificado</a></li>
+          <li><a href="#personalizacion">Bordado profesional</a></li>
+          <li><a href="#personalizacion">DTF a color</a></li>
+        </ul>
+      </div>
+      <!-- Sectores column -->
+      <div>
+        <h4>Sectores</h4>
+        <ul>
+          <li><a href="#sectores">Industria</a></li>
+          <li><a href="#sectores">Hostelería</a></li>
+          <li><a href="#sectores">Sanitario</a></li>
+          <li><a href="#sectores">Construcción</a></li>
+        </ul>
+      </div>
+      <!-- Contacto column -->
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li>C. Julián García, 9 · Tarancón</li>
+          <li><a href={`tel:${CONTACT.phone}`}>{CONTACT.phoneDisplay}</a></li>
+          <li><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></li>
+          <li>
+            <a href={CONTACT.blog} target="_blank" rel="noopener noreferrer">Blog ↗</a>
+          </li>
+        </ul>
+        <div class="ftr__social" style="margin-top:18px">
+          <a href="#" aria-label="Instagram">
+            <Icon name="ig" width="18" height="18" />
+          </a>
+          <a href="#" aria-label="Facebook">
+            <Icon name="fb" width="18" height="18" />
+          </a>
+          <a href={CONTACT.whatsapp} aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+            <Icon name="whatsapp" width="18" height="18" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="ftr__bottom">
+      <div>© 2026 El Rincón del Trabajador · Tarancón, Cuenca</div>
+      <div style="display:flex;gap:18px">
+        <a href="#">Aviso legal</a>
+        <a href="#">Privacidad</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
