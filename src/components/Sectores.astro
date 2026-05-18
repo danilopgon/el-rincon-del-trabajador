@@ -1,0 +1,39 @@
+---
+import Icon from './icons/Icon.astro';
+
+const sectors = [
+  { icon: 'sIndustry', title: 'Industria',     meta: 'Fabricación · talleres' },
+  { icon: 'sHorec',    title: 'Hostelería',    meta: 'Cocina · sala' },
+  { icon: 'sHealth',   title: 'Sanitario',     meta: 'Clínicas · residencias' },
+  { icon: 'sLogi',     title: 'Logística',     meta: 'Almacén · reparto' },
+  { icon: 'sConstr',   title: 'Construcción',  meta: 'Obra · reformas' },
+  { icon: 'sShop',     title: 'Comercio',      meta: 'Tiendas · oficinas' },
+];
+---
+<section id="sectores" class="section section--paper">
+  <div class="wrap">
+    <div class="svc__head" data-reveal>
+      <div>
+        <span class="eyebrow">Para quién trabajamos</span>
+        <h2 style="margin-top:16px">Cada sector,<br />su propia prenda.</h2>
+      </div>
+      <p class="lead">
+        En Tarancón se mueven polígonos, restaurantes, residencias y obra
+        grande. Conocemos las normativas y los materiales que aguantan en
+        cada uno.
+      </p>
+    </div>
+    <div class="sect__grid" data-reveal>
+      {sectors.map((s) => (
+        <div class="sect__cell">
+          <Icon name={s.icon} width="36" height="36" class="sect__cell-icon" />
+          <div class="sect__cell-arrow">
+            <Icon name="arrowUR" width="20" height="20" />
+          </div>
+          <span class="sect__cell-meta">{s.meta}</span>
+          <span class="sect__cell-title">{s.title}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
