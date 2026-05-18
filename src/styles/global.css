@@ -675,6 +675,9 @@ button { font: inherit; cursor: pointer; }
   padding-top: 16px;
 }
 
+/* ========== Utility ========== */
+.gold { color: var(--color-gold); }
+
 /* ========== CTA banner ========== */
 .cta-banner {
   background: var(--c-navy);

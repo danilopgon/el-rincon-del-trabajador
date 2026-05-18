@@ -1,0 +1,75 @@
+---
+import Icon from './icons/Icon.astro';
+import { CONTACT } from '../lib/contact';
+---
+<section id="tienda" class="section">
+  <div class="wrap">
+    <div class="svc__head" data-reveal style="margin-bottom:40px">
+      <div>
+        <span class="eyebrow">La tienda</span>
+        <h2 style="margin-top:16px">Pásate, te atendemos<br />como toda la vida.</h2>
+      </div>
+      <p class="lead">
+        Estamos en pleno centro de Tarancón, a un paso de la N-400.
+        Aparcamiento fácil en la zona. Vente con la prenda vieja y te la
+        comparamos.
+      </p>
+    </div>
+    <div class="shop__grid">
+      <div class="shop__map" data-reveal>
+        <iframe
+          title="Mapa El Rincón del Trabajador"
+          src={CONTACT.mapsEmbed}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+          style="border:0;width:100%;height:100%"
+        ></iframe>
+      </div>
+      <div class="shop__info" data-reveal>
+        <div class="shop__row">
+          <div class="shop__row-icon"><Icon name="pin" width="20" height="20" /></div>
+          <div class="shop__row-body">
+            <strong>Dirección</strong>
+            <p>{CONTACT.address}</p>
+          </div>
+        </div>
+        <div class="shop__row">
+          <div class="shop__row-icon"><Icon name="clock" width="20" height="20" /></div>
+          <div class="shop__row-body">
+            <strong>Horario</strong>
+            <p>{CONTACT.hoursWeek}<br />{CONTACT.hoursWeekend}</p>
+          </div>
+        </div>
+        <div class="shop__row">
+          <div class="shop__row-icon"><Icon name="phone" width="20" height="20" /></div>
+          <div class="shop__row-body">
+            <strong>Teléfono</strong>
+            <p>
+              <a href={`tel:${CONTACT.phone}`}>{CONTACT.phoneDisplay}</a>
+              &nbsp;·&nbsp;
+              <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            </p>
+          </div>
+        </div>
+        <div class="shop__row">
+          <div class="shop__row-icon"><Icon name="mail" width="20" height="20" /></div>
+          <div class="shop__row-body">
+            <strong>Correo</strong>
+            <p><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></p>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:8px">
+          <a href={CONTACT.mapsLink} class="btn btn--primary" target="_blank" rel="noopener noreferrer">
+            Cómo llegar
+            <Icon name="arrowUR" width="18" height="18" class="icon" />
+          </a>
+          <a href={CONTACT.whatsapp} class="btn btn--ghost" target="_blank" rel="noopener noreferrer">
+            <Icon name="whatsapp" width="18" height="18" class="icon" />
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
