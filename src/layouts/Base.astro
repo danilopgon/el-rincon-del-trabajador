@@ -1,0 +1,94 @@
+---
+import '../styles/global.css';
+import { CONTACT } from '../lib/contact';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'El Rincón del Trabajador — Vestuario laboral, EPI y personalización en Tarancón',
+  description = 'Ropa de trabajo, EPI certificado y bordado/DTF desde una unidad. Asesoramiento en tienda y por WhatsApp, en Tarancón (Cuenca) con 15 años de oficio en el sector.',
+} = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'El Rincón del Trabajador',
+  description,
+  url: 'https://elrincondeltrabajador.es',
+  telephone: CONTACT.phone,
+  email: CONTACT.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'C. Julián García, 9',
+    addressLocality: 'Tarancón',
+    addressRegion: 'Cuenca',
+    postalCode: '16400',
+    addressCountry: 'ES',
+  },
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '09:00', closes: '14:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '16:00', closes: '19:00' },
+  ],
+};
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og-image.png" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body>
+    <slot />
+    <script>
+      import { gsap } from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Single-element reveals
+      document.querySelectorAll('[data-reveal]').forEach((el) => {
+        gsap.fromTo(
+          el,
+          { y: 24, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: 'power3.out',
+            delay: (Number((el as HTMLElement).dataset.revealDelay) || 0) / 1000,
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 88%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      });
+
+      // Stagger reveals (for card grids)
+      gsap.utils.toArray<HTMLElement>('[data-reveal-stagger] > *').forEach((el) => {
+        gsap.fromTo(
+          el,
+          { y: 32, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 92%' },
+          }
+        );
+      });
+    </script>
+  </body>
+</html>
