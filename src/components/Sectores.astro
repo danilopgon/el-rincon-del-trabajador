@@ -25,14 +25,14 @@ const sectors = [
     </div>
     <div class="sect__grid" data-reveal>
       {sectors.map((s) => (
-        <div class="sect__cell">
+        <a href="#contacto" class="sect__cell" aria-label={`${s.title}: ${s.meta} — pedir presupuesto`}>
           <Icon name={s.icon} width="36" height="36" class="sect__cell-icon" />
           <div class="sect__cell-arrow">
             <Icon name="arrowUR" width="20" height="20" />
           </div>
           <span class="sect__cell-meta">{s.meta}</span>
           <span class="sect__cell-title">{s.title}</span>
-        </div>
+        </a>
       ))}
     </div>
   </div>

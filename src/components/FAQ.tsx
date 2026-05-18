@@ -29,33 +29,55 @@ const questions = [
   },
 ];
 
-function FAQItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boolean; onToggle: () => void }) {
-  const answerRef = useRef<HTMLDivElement>(null);
+function FAQItem({
+  q, a, isOpen, onToggle, index,
+}: {
+  q: string; a: string; isOpen: boolean; onToggle: () => void; index: number;
+}) {
+  const panelRef = useRef<HTMLDivElement>(null);
+  const btnId   = `faq-btn-${index}`;
+  const panelId = `faq-panel-${index}`;
 
   useEffect(() => {
-    if (!answerRef.current) return;
-    const height = isOpen ? answerRef.current.scrollHeight : 0;
-    gsap.to(answerRef.current, {
-      maxHeight: height,
+    if (!panelRef.current) return;
+    gsap.to(panelRef.current, {
+      maxHeight: isOpen ? panelRef.current.scrollHeight : 0,
+      paddingTop: isOpen ? 16 : 0,
       duration: 0.32,
       ease: 'power2.inOut',
     });
   }, [isOpen]);
 
   return (
-    <button type="button" className={`faq__item${isOpen ? ' is-open' : ''}`} onClick={onToggle} aria-expanded={isOpen}>
-      <div className="faq__item-q">
-        <span>{q}</span>
-        <span className="faq__item-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 5v14M5 12h14" />
-          </svg>
-        </span>
-      </div>
-      <div className="faq__item-a" ref={answerRef} style={{ maxHeight: 0, overflow: 'hidden' }}>
+    <div className={`faq__item${isOpen ? ' is-open' : ''}`}>
+      <button
+        id={btnId}
+        type="button"
+        className="faq__item-btn"
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+      >
+        <div className="faq__item-q">
+          <span>{q}</span>
+          <span className="faq__item-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </span>
+        </div>
+      </button>
+      <div
+        id={panelId}
+        role="region"
+        aria-labelledby={btnId}
+        className="faq__item-a"
+        ref={panelRef}
+        style={{ maxHeight: 0, overflow: 'hidden' }}
+      >
         {a}
       </div>
-    </button>
+    </div>
   );
 }
 
@@ -80,6 +102,7 @@ export default function FAQ() {
             {questions.map((item, i) => (
               <FAQItem
                 key={i}
+                index={i}
                 q={item.q}
                 a={item.a}
                 isOpen={open === i}
