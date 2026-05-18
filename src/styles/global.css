@@ -641,6 +641,10 @@ button { font: inherit; cursor: pointer; }
   border-top: 1px solid var(--c-line);
   padding: 20px 0;
   cursor: pointer;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font: inherit;
 }
 .faq__item:last-child { border-bottom: 1px solid var(--c-line); }
 .faq__item-q {

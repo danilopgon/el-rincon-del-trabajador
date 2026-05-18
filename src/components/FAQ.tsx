@@ -34,15 +34,16 @@ function FAQItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boo
 
   useEffect(() => {
     if (!answerRef.current) return;
+    const height = isOpen ? answerRef.current.scrollHeight : 0;
     gsap.to(answerRef.current, {
-      maxHeight: isOpen ? 200 : 0,
+      maxHeight: height,
       duration: 0.32,
       ease: 'power2.inOut',
     });
   }, [isOpen]);
 
   return (
-    <div className={`faq__item${isOpen ? ' is-open' : ''}`} onClick={onToggle}>
+    <button type="button" className={`faq__item${isOpen ? ' is-open' : ''}`} onClick={onToggle} aria-expanded={isOpen}>
       <div className="faq__item-q">
         <span>{q}</span>
         <span className="faq__item-icon">
@@ -54,7 +55,7 @@ function FAQItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boo
       <div className="faq__item-a" ref={answerRef} style={{ maxHeight: 0, overflow: 'hidden' }}>
         {a}
       </div>
-    </div>
+    </button>
   );
 }
 

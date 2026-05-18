@@ -83,5 +83,3 @@ p { text-wrap: pretty; }
   background: var(--color-gold);
 }
 
-/* ===== Reveal anim hook (used by GSAP ScrollTrigger) ===== */
-[data-reveal] { opacity: 0; will-change: transform, opacity; }
