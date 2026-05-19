@@ -11,7 +11,7 @@ const items = [
 const doubled = [...items, ...items];
 ---
 <div class="marquee">
-  <div class="marquee__track" style="will-change:transform">
+  <div class="marquee__track">
     {doubled.map((item) => (
       <span class="marquee__item">
         <span class="dot"></span>{item}

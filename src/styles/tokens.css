@@ -39,6 +39,9 @@
 /* ===== Body defaults ===== */
 html, body { margin: 0; padding: 0; }
 body {
+  /* overflow-x: clip prevents horizontal scroll from off-screen fixed/transformed elements
+     (nav drawer, marquee). Using clip not hidden so position:fixed stays viewport-relative. */
+  overflow-x: clip;
   background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-sans);
