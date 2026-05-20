@@ -50,7 +50,7 @@ export default function Personalizacion() {
             <h2>
               Tu logo,
               <br />
-              cosido en su sitio.
+              con la calidad que merece.
             </h2>
             <p className="lead">
               Bordamos en máquina industrial con hilos de calidad y aplicamos DTF de gran

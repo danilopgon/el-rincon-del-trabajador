@@ -245,7 +245,7 @@ button {
   position: relative;
 }
 .heroA__title {
-  font-size: clamp(64px, 9.5vw, 168px);
+  font-size: clamp(64px, 9.5vw, 136px);
   line-height: 0.86;
   font-weight: 800;
   text-transform: uppercase;
@@ -286,6 +286,7 @@ button {
 }
 .heroA__meta {
   display: flex;
+  justify-content: start;
   gap: 28px;
   margin-top: 40px;
   flex-wrap: wrap;
@@ -341,58 +342,6 @@ button {
   font-size: 24px;
   letter-spacing: 0;
   margin-bottom: 4px;
-}
-
-/* ========== Hero placeholder (remove when real photo arrives) ========== */
-.heroA__ph {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    155deg,
-    var(--c-cream) 0%,
-    var(--c-cream-deep) 52%,
-    color-mix(in oklab, var(--c-cream-deep) 82%, var(--c-gold)) 100%
-  );
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  position: relative;
-  overflow: hidden;
-}
-.heroA__ph::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 32px,
-    rgba(36, 48, 63, 0.028) 32px,
-    rgba(36, 48, 63, 0.028) 33px
-  );
-}
-.heroA__ph-icon {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  border: 1.5px solid var(--c-gold);
-  display: grid;
-  place-items: center;
-  color: var(--c-gold);
-  position: relative;
-  z-index: 1;
-}
-.heroA__ph-label {
-  font-family: var(--f-display);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--c-muted);
-  font-weight: 600;
-  position: relative;
-  z-index: 1;
 }
 
 /* ========== Decorative needle ========== */
