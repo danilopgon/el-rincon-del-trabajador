@@ -25,3 +25,6 @@ pnpm-debug.log*
 # Windows
 bash.exe.stackdump
 Thumbs.db
+
+# Claude local settings
+.claude/settings.local.json
