@@ -2,8 +2,12 @@
   "name": "el-rincon-del-trabajador",
   "type": "module",
   "version": "0.0.1",
+  "packageManager": "pnpm@10.18.0",
   "engines": {
     "node": ">=22.12.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild", "sharp"]
   },
   "scripts": {
     "dev": "astro dev",
