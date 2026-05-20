@@ -1,16 +1,16 @@
 @theme {
   /* ===== Color ===== */
-  --color-navy: #24303F;
-  --color-navy-deep: #181F2A;
-  --color-gold: #CCA43B;
-  --color-gold-deep: #A8842A;
-  --color-brown: #4D341F;
-  --color-brown-soft: #6B4A2E;
-  --color-cream: #F7EFD9;
-  --color-cream-deep: #EFE3C4;
-  --color-paper: #FAF6EB;
-  --color-ink: #1A222D;
-  --color-muted: #6F6A5C;
+  --color-navy: #24303f;
+  --color-navy-deep: #181f2a;
+  --color-gold: #cca43b;
+  --color-gold-deep: #a8842a;
+  --color-brown: #4d341f;
+  --color-brown-soft: #6b4a2e;
+  --color-cream: #f7efd9;
+  --color-cream-deep: #efe3c4;
+  --color-paper: #faf6eb;
+  --color-ink: #1a222d;
+  --color-muted: #6f6a5c;
 
   /* ===== Type ===== */
   --font-display: "Saira Condensed Variable", "Saira Condensed", system-ui, sans-serif;
@@ -37,7 +37,11 @@
 }
 
 /* ===== Body defaults ===== */
-html, body { margin: 0; padding: 0; }
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
 body {
   /* overflow-x: clip prevents horizontal scroll from off-screen fixed/transformed elements
      (nav drawer, marquee). Using clip not hidden so position:fixed stays viewport-relative. */
@@ -52,7 +56,9 @@ body {
 }
 
 /* ===== Headings ===== */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: var(--font-display);
   font-weight: 800;
   letter-spacing: -0.01em;
@@ -62,11 +68,20 @@ h1, h2, h3 {
   text-wrap: balance;
   margin: 0;
 }
-h1 { font-size: clamp(56px, 7.6vw, 132px); }
-h2 { font-size: clamp(40px, 5vw, 84px); }
-h3 { font-size: clamp(22px, 1.8vw, 28px); text-transform: uppercase; }
+h1 {
+  font-size: clamp(56px, 7.6vw, 132px);
+}
+h2 {
+  font-size: clamp(40px, 5vw, 84px);
+}
+h3 {
+  font-size: clamp(22px, 1.8vw, 28px);
+  text-transform: uppercase;
+}
 
-p { text-wrap: pretty; }
+p {
+  text-wrap: pretty;
+}
 
 /* ===== Eyebrow ===== */
 .eyebrow {
@@ -85,4 +100,3 @@ p { text-wrap: pretty; }
   height: 2px;
   background: var(--color-gold);
 }
-

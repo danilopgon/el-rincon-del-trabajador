@@ -1,31 +1,47 @@
 ---
 const services = [
   {
-    n: '01',
-    title: 'Ropa de trabajo',
-    desc: 'Monos, pantalones, chaquetillas y prendas técnicas para cualquier sector.',
-    list: ['Industria y obra', 'Hostelería y cocina', 'Sanitario y limpieza', 'Logística y reparto'],
+    n: "01",
+    title: "Ropa de trabajo",
+    desc: "Monos, pantalones, chaquetillas y prendas técnicas para cualquier sector.",
+    list: [
+      "Industria y obra",
+      "Hostelería y cocina",
+      "Sanitario y limpieza",
+      "Logística y reparto",
+    ],
   },
   {
-    n: '02',
-    title: 'EPI certificado',
-    desc: 'Calzado de seguridad, guantes, gafas, auriculares y arneses con marcado CE.',
-    list: ['Calzado S1P · S3', 'Protección manos', 'Protección ocular y auditiva', 'Anticaídas y altura'],
+    n: "02",
+    title: "EPI certificado",
+    desc: "Calzado de seguridad, guantes, gafas, auriculares y arneses con marcado CE.",
+    list: [
+      "Calzado S1P · S3",
+      "Protección manos",
+      "Protección ocular y auditiva",
+      "Anticaídas y altura",
+    ],
   },
   {
-    n: '03',
-    title: 'Bordado y DTF',
-    desc: 'Personalizamos con tu logo desde una sola prenda. Pruebas digitales antes de coser.',
-    list: ['Bordado profesional', 'DTF a todo color', 'Vinilo textil', 'Etiquetado y tallaje'],
+    n: "03",
+    title: "Bordado y DTF",
+    desc: "Personalizamos con tu logo desde una sola prenda. Pruebas digitales antes de coser.",
+    list: ["Bordado profesional", "DTF a todo color", "Vinilo textil", "Etiquetado y tallaje"],
   },
   {
-    n: '04',
-    title: 'Asesoramiento',
-    desc: 'Te ayudamos a elegir según normativa, sector y presupuesto. En persona o por WhatsApp.',
-    list: ['Análisis de necesidades', 'Tallaje en tienda', 'Renovación de uniformes', 'Postventa cercana'],
+    n: "04",
+    title: "Asesoramiento",
+    desc: "Te ayudamos a elegir según normativa, sector y presupuesto. En persona o por WhatsApp.",
+    list: [
+      "Análisis de necesidades",
+      "Tallaje en tienda",
+      "Renovación de uniformes",
+      "Postventa cercana",
+    ],
   },
 ];
 ---
+
 <section id="servicios" class="section">
   <div class="wrap">
     <div class="svc__head" data-reveal>
@@ -34,30 +50,44 @@ const services = [
         <h2 style="margin-top:16px">Cuatro patas,<br />una misma tienda.</h2>
       </div>
       <p class="lead">
-        Todo lo que tu equipo necesita para empezar el lunes vestido:
-        prenda, protección, identidad bordada y alguien al teléfono cuando
-        hace falta resolver algo.
+        Todo lo que tu equipo necesita para empezar el lunes vestido: prenda, protección, identidad
+        bordada y alguien al teléfono cuando hace falta resolver algo.
       </p>
     </div>
     <div class="svc__grid" data-reveal-stagger>
-      {services.map((svc) => (
-        <article class="svc__card">
-          <div class="svc__card-img">
-            <!-- TODO: Replace with client photo (4:3) -->
-            <div style="width:100%;height:100%;background:var(--color-cream-deep);display:flex;align-items:center;justify-content:center;">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>
-              </svg>
+      {
+        services.map((svc) => (
+          <article class="svc__card">
+            <div class="svc__card-img">
+              {/* TODO: Replace with client photo, aspect ratio 4/3 */}
+              <div style="width:100%;height:100%;background:var(--color-cream-deep);display:flex;align-items:center;justify-content:center;">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="var(--color-gold)"
+                  stroke-width="1.5"
+                >
+                  <>
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <path d="m21 15-5-5L5 21" />
+                  </>
+                </svg>
+              </div>
             </div>
-          </div>
-          <div class="svc__card-num">{svc.n} / 04</div>
-          <h3>{svc.title}</h3>
-          <p>{svc.desc}</p>
-          <ul class="svc__card-list">
-            {svc.list.map((item) => <li>{item}</li>)}
-          </ul>
-        </article>
-      ))}
+            <div class="svc__card-num">{svc.n} / 04</div>
+            <h3>{svc.title}</h3>
+            <p>{svc.desc}</p>
+            <ul class="svc__card-list">
+              {svc.list.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
     </div>
   </div>
 </section>

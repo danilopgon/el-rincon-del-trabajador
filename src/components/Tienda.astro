@@ -1,7 +1,8 @@
 ---
-import Icon from './icons/Icon.astro';
-import { CONTACT } from '../lib/contact';
+import Icon from "./icons/Icon.astro";
+import { CONTACT } from "../lib/contact";
 ---
+
 <section id="tienda" class="section">
   <div class="wrap">
     <div class="svc__head" data-reveal style="margin-bottom:40px">
@@ -10,9 +11,8 @@ import { CONTACT } from '../lib/contact';
         <h2 style="margin-top:16px">Pásate, te atendemos<br />como toda la vida.</h2>
       </div>
       <p class="lead">
-        Estamos en pleno centro de Tarancón, a un paso de la N-400.
-        Aparcamiento fácil en la zona. Vente con la prenda vieja y te la
-        comparamos.
+        Estamos en pleno centro de Tarancón, a un paso de la N-400. Aparcamiento fácil en la zona.
+        Vente con la prenda vieja y te la comparamos.
       </p>
     </div>
     <div class="shop__grid">
@@ -23,8 +23,7 @@ import { CONTACT } from '../lib/contact';
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
           allowfullscreen
-          style="border:0;width:100%;height:100%"
-        ></iframe>
+          style="border:0;width:100%;height:100%"></iframe>
       </div>
       <div class="shop__info" data-reveal>
         <div class="shop__row">
@@ -60,11 +59,21 @@ import { CONTACT } from '../lib/contact';
           </div>
         </div>
         <div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap">
-          <a href={CONTACT.mapsLink} class="btn btn--primary" target="_blank" rel="noopener noreferrer">
+          <a
+            href={CONTACT.mapsLink}
+            class="btn btn--primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Cómo llegar
             <Icon name="arrowUR" width="18" height="18" class="icon" />
           </a>
-          <a href={CONTACT.whatsapp} class="btn btn--ghost" target="_blank" rel="noopener noreferrer">
+          <a
+            href={CONTACT.whatsapp}
+            class="btn btn--ghost"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Icon name="whatsapp" width="18" height="18" class="icon" />
             WhatsApp
           </a>

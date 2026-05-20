@@ -1,15 +1,16 @@
 ---
-import Icon from './icons/Icon.astro';
+import Icon from "./icons/Icon.astro";
 
 const sectors = [
-  { icon: 'sIndustry', title: 'Industria',     meta: 'Fabricación · talleres' },
-  { icon: 'sHorec',    title: 'Hostelería',    meta: 'Cocina · sala' },
-  { icon: 'sHealth',   title: 'Sanitario',     meta: 'Clínicas · residencias' },
-  { icon: 'sLogi',     title: 'Logística',     meta: 'Almacén · reparto' },
-  { icon: 'sConstr',   title: 'Construcción',  meta: 'Obra · reformas' },
-  { icon: 'sShop',     title: 'Comercio',      meta: 'Tiendas · oficinas' },
+  { icon: "sIndustry", title: "Industria", meta: "Fabricación · talleres" },
+  { icon: "sHorec", title: "Hostelería", meta: "Cocina · sala" },
+  { icon: "sHealth", title: "Sanitario", meta: "Clínicas · residencias" },
+  { icon: "sLogi", title: "Logística", meta: "Almacén · reparto" },
+  { icon: "sConstr", title: "Construcción", meta: "Obra · reformas" },
+  { icon: "sShop", title: "Comercio", meta: "Tiendas · oficinas" },
 ];
 ---
+
 <section id="sectores" class="section section--paper">
   <div class="wrap">
     <div class="svc__head" data-reveal>
@@ -18,22 +19,28 @@ const sectors = [
         <h2 style="margin-top:16px">Cada sector,<br />su propia prenda.</h2>
       </div>
       <p class="lead">
-        En Tarancón se mueven polígonos, restaurantes, residencias y obra
-        grande. Conocemos las normativas y los materiales que aguantan en
-        cada uno.
+        En El Rincón del Trabajador sabemos que no es lo mismo trabajar en un restaurante que en una
+        fábrica. Por eso ofrecemos ropa de trabajo adaptada a cada sector, con tejidos y acabados
+        específicos para cada tipo de uso.
       </p>
     </div>
     <div class="sect__grid" data-reveal>
-      {sectors.map((s) => (
-        <a href="#contacto" class="sect__cell" aria-label={`${s.title}: ${s.meta} — pedir presupuesto`}>
-          <Icon name={s.icon} width="36" height="36" class="sect__cell-icon" />
-          <div class="sect__cell-arrow">
-            <Icon name="arrowUR" width="20" height="20" />
-          </div>
-          <span class="sect__cell-meta">{s.meta}</span>
-          <span class="sect__cell-title">{s.title}</span>
-        </a>
-      ))}
+      {
+        sectors.map((s) => (
+          <a
+            href="#contacto"
+            class="sect__cell"
+            aria-label={`${s.title}: ${s.meta} — pedir presupuesto`}
+          >
+            <Icon name={s.icon} width="36" height="36" class="sect__cell-icon" />
+            <div class="sect__cell-arrow">
+              <Icon name="arrowUR" width="20" height="20" />
+            </div>
+            <span class="sect__cell-meta">{s.meta}</span>
+            <span class="sect__cell-title">{s.title}</span>
+          </a>
+        ))
+      }
     </div>
   </div>
 </section>

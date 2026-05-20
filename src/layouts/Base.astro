@@ -1,6 +1,6 @@
 ---
-import '../styles/global.css';
-import { CONTACT } from '../lib/contact';
+import "../styles/global.css";
+import { CONTACT } from "../lib/contact";
 
 interface Props {
   title?: string;
@@ -8,32 +8,43 @@ interface Props {
 }
 
 const {
-  title = 'El Rincón del Trabajador — Vestuario laboral, EPI y personalización en Tarancón',
-  description = 'Ropa de trabajo, EPI certificado y bordado/DTF desde una unidad. Asesoramiento en tienda y por WhatsApp, en Tarancón (Cuenca) con 15 años de oficio en el sector.',
+  title = "El Rincón del Trabajador — Vestuario laboral, EPI y personalización en Tarancón",
+  description = "Ropa de trabajo, EPI certificado y bordado/DTF desde una unidad. Asesoramiento en tienda y por WhatsApp, en Tarancón (Cuenca) con 15 años de oficio en el sector.",
 } = Astro.props;
 
 const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'El Rincón del Trabajador',
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "El Rincón del Trabajador",
   description,
-  url: 'https://elrincondeltrabajador.es',
+  url: "https://elrincondeltrabajador.es",
   telephone: CONTACT.phone,
   email: CONTACT.email,
   address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'C. Julián García, 9',
-    addressLocality: 'Tarancón',
-    addressRegion: 'Cuenca',
-    postalCode: '16400',
-    addressCountry: 'ES',
+    "@type": "PostalAddress",
+    streetAddress: "C. Julián García, 9",
+    addressLocality: "Tarancón",
+    addressRegion: "Cuenca",
+    postalCode: "16400",
+    addressCountry: "ES",
   },
   openingHoursSpecification: [
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '09:00', closes: '14:00' },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '16:00', closes: '19:00' },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "14:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "16:00",
+      closes: "19:00",
+    },
   ],
 };
 ---
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -46,17 +57,17 @@ const schema = {
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/og-image.png" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
   <body>
     <slot />
     <script>
-      import { gsap } from 'gsap';
-      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
       gsap.registerPlugin(ScrollTrigger);
 
       // Single-element reveals
-      document.querySelectorAll('[data-reveal]').forEach((el) => {
+      document.querySelectorAll("[data-reveal]").forEach((el) => {
         gsap.fromTo(
           el,
           { y: 24, opacity: 0 },
@@ -64,19 +75,19 @@ const schema = {
             y: 0,
             opacity: 1,
             duration: 0.7,
-            ease: 'power3.out',
+            ease: "power3.out",
             delay: (Number((el as HTMLElement).dataset.revealDelay) || 0) / 1000,
             scrollTrigger: {
               trigger: el,
-              start: 'top 88%',
-              toggleActions: 'play none none none',
+              start: "top 88%",
+              toggleActions: "play none none none",
             },
           }
         );
       });
 
       // Stagger reveals (for card grids) — one trigger per parent, all children stagger together
-      gsap.utils.toArray<HTMLElement>('[data-reveal-stagger]').forEach((parent) => {
+      gsap.utils.toArray<HTMLElement>("[data-reveal-stagger]").forEach((parent) => {
         const children = Array.from((parent as HTMLElement).children);
         gsap.fromTo(
           children,
@@ -86,8 +97,8 @@ const schema = {
             opacity: 1,
             duration: 0.6,
             stagger: 0.08,
-            ease: 'power3.out',
-            scrollTrigger: { trigger: parent as HTMLElement, start: 'top 88%' },
+            ease: "power3.out",
+            scrollTrigger: { trigger: parent as HTMLElement, start: "top 88%" },
           }
         );
       });

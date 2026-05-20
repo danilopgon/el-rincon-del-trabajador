@@ -1,21 +1,25 @@
 ---
 const items = [
-  'Bordado desde 1 unidad',
-  'DTF en color a partir de 5 prendas',
-  'EPI certificado CE',
-  'Asesoramiento en tienda',
-  'Entregas 48–72 h en Cuenca',
-  'Marcas Velilla · Issa · Panoply',
-  '15 años de oficio',
+  "Bordado desde 1 unidad",
+  "DTF en color a partir de 5 prendas",
+  "EPI certificado CE",
+  "Asesoramiento en tienda",
+  "Entregas 48–72 h en Cuenca",
+  "Marcas Velilla · Issa · Panoply",
+  "15 años de oficio",
 ];
 const doubled = [...items, ...items];
 ---
+
 <div class="marquee">
   <div class="marquee__track">
-    {doubled.map((item) => (
-      <span class="marquee__item">
-        <span class="dot"></span>{item}
-      </span>
-    ))}
+    {
+      doubled.map((item) => (
+        <span class="marquee__item">
+          <span class="dot" />
+          {item}
+        </span>
+      ))
+    }
   </div>
 </div>

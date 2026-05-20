@@ -1,9 +1,9 @@
-@import '@fontsource/saira-condensed/700.css';
-@import '@fontsource/saira-condensed/800.css';
-@import '@fontsource/saira-condensed/900.css';
-@import '@fontsource-variable/inter-tight/wght.css';
-@import 'tailwindcss';
-@import './tokens.css';
+@import "@fontsource/saira-condensed/700.css";
+@import "@fontsource/saira-condensed/800.css";
+@import "@fontsource/saira-condensed/900.css";
+@import "@fontsource-variable/inter-tight/wght.css";
+@import "tailwindcss";
+@import "./tokens.css";
 
 /* ===== Prototype-to-token aliases ===== */
 /* Maps reference/styles.css var names to the Tailwind v4 theme tokens */
@@ -198,7 +198,7 @@ button {
   position: relative;
 }
 .hdr__nav a::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   right: 0;
@@ -259,7 +259,7 @@ button {
   position: relative;
 }
 .heroA__title em::after {
-  content: '';
+  content: "";
   position: absolute;
   left: -4%;
   right: -4%;
@@ -362,7 +362,7 @@ button {
   overflow: hidden;
 }
 .heroA__ph::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
@@ -527,7 +527,7 @@ button {
   opacity: 0.85;
 }
 .svc__card-list li::before {
-  content: '';
+  content: "";
   width: 4px;
   height: 4px;
   border-radius: 50%;
@@ -1007,10 +1007,18 @@ button {
   color: var(--c-navy);
   border-color: var(--c-gold);
 }
-.ftr__social a:not([href]) {
+.ftr__social-placeholder {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(247, 239, 217, 0.25);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
   opacity: 0.35;
   cursor: default;
-  pointer-events: none;
+  background: transparent;
+  color: inherit;
+  padding: 0;
 }
 
 /* ========== WhatsApp flotante ========== */

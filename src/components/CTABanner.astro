@@ -1,7 +1,8 @@
 ---
-import Icon from './icons/Icon.astro';
-import { CONTACT } from '../lib/contact';
+import Icon from "./icons/Icon.astro";
+import { CONTACT } from "../lib/contact";
 ---
+
 <section id="contacto" class="cta-banner">
   <div class="wrap cta-banner__inner" data-reveal>
     <div>
@@ -10,20 +11,33 @@ import { CONTACT } from '../lib/contact';
         ¿Listos para vestir<br />a vuestro <span class="gold">equipo?</span>
       </h2>
       <p class="cta-banner__sub">
-        Cuéntanos qué sector, cuántas personas y si necesitáis bordado. En
-        menos de 24 horas tienes presupuesto y muestrario en pantalla.
+        Cuéntanos qué sector, cuántas personas y si necesitáis bordado. En menos de 24 horas tienes
+        presupuesto y muestrario en pantalla.
       </p>
     </div>
     <div class="cta-banner__actions">
-      <a href={CONTACT.whatsappCta} class="btn btn--gold btn--lg" target="_blank" rel="noopener noreferrer">
+      <a
+        href={CONTACT.whatsappCta}
+        class="btn btn--gold btn--lg"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <Icon name="whatsapp" width="18" height="18" class="icon" />
         Presupuesto por WhatsApp
       </a>
-      <a href={`tel:${CONTACT.phone}`} class="btn btn--ghost btn--lg" style="color:var(--color-cream);border-color:rgba(247,239,217,0.55)">
+      <a
+        href={`tel:${CONTACT.phone}`}
+        class="btn btn--ghost btn--lg"
+        style="color:var(--color-cream);border-color:rgba(247,239,217,0.55)"
+      >
         <Icon name="phone" width="18" height="18" class="icon" />
         {CONTACT.phoneDisplay}
       </a>
-      <a href={`mailto:${CONTACT.email}`} class="btn btn--ghost btn--lg" style="color:var(--color-cream);border-color:rgba(247,239,217,0.55)">
+      <a
+        href={`mailto:${CONTACT.email}`}
+        class="btn btn--ghost btn--lg"
+        style="color:var(--color-cream);border-color:rgba(247,239,217,0.55)"
+      >
         <Icon name="mail" width="18" height="18" class="icon" />
         Escribir email
       </a>

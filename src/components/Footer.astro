@@ -1,7 +1,8 @@
 ---
-import Icon from './icons/Icon.astro';
-import { CONTACT } from '../lib/contact';
+import Icon from "./icons/Icon.astro";
+import { CONTACT } from "../lib/contact";
 ---
+
 <footer class="ftr">
   <div class="wrap">
     <div class="ftr__top">
@@ -10,13 +11,21 @@ import { CONTACT } from '../lib/contact';
         <div style="display:flex;align-items:center;gap:16px">
           <img src="/logo-marca.png" alt="El Rincón del Trabajador" width="45" height="64" />
           <div style="line-height:0.95">
-            <div style="font-family:var(--font-display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:0.02em;color:var(--color-cream)">El Rincón</div>
-            <div style="font-family:var(--font-display);font-weight:600;font-size:13px;letter-spacing:0.2em;color:var(--color-gold);text-transform:uppercase;margin-top:4px">del Trabajador</div>
+            <div
+              style="font-family:var(--font-display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:0.02em;color:var(--color-cream)"
+            >
+              El Rincón
+            </div>
+            <div
+              style="font-family:var(--font-display);font-weight:600;font-size:13px;letter-spacing:0.2em;color:var(--color-gold);text-transform:uppercase;margin-top:4px"
+            >
+              del Trabajador
+            </div>
           </div>
         </div>
         <p class="ftr__brand-text">
-          Vestuario laboral, EPI certificado y personalización con bordado y
-          DTF. Tarancón, Cuenca · 15 años de oficio en el sector.
+          Vestuario laboral, EPI certificado y personalización con bordado y DTF. Tarancón, Cuenca ·
+          15 años de oficio en el sector.
         </p>
       </div>
       <!-- Servicios column -->
@@ -51,15 +60,28 @@ import { CONTACT } from '../lib/contact';
           </li>
         </ul>
         <div class="ftr__social" style="margin-top:18px">
-          <!-- TODO: Add real Instagram URL before launch -->
-          <a aria-label="Instagram (próximamente)">
+          <!-- TODO: Replace href with real Instagram URL before launch -->
+          <button
+            type="button"
+            aria-label="Instagram (próximamente)"
+            class="ftr__social-placeholder"
+          >
             <Icon name="ig" width="18" height="18" />
-          </a>
-          <!-- TODO: Add real Facebook URL before launch -->
-          <a aria-label="Facebook (próximamente)">
+          </button>
+          <!-- TODO: Replace href with real Facebook URL before launch -->
+          <button
+            type="button"
+            aria-label="Facebook (próximamente)"
+            class="ftr__social-placeholder"
+          >
             <Icon name="fb" width="18" height="18" />
-          </a>
-          <a href={CONTACT.whatsapp} aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+          </button>
+          <a
+            href={CONTACT.whatsapp}
+            aria-label="WhatsApp"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Icon name="whatsapp" width="18" height="18" />
           </a>
         </div>
@@ -68,9 +90,9 @@ import { CONTACT } from '../lib/contact';
     <div class="ftr__bottom">
       <div>© 2026 El Rincón del Trabajador · Tarancón, Cuenca</div>
       <div style="display:flex;gap:18px">
-        <a href="#">Aviso legal</a>
-        <a href="#">Privacidad</a>
-        <a href="#">Cookies</a>
+        <a href="/aviso-legal">Aviso legal</a>
+        <a href="/privacidad">Privacidad</a>
+        <a href="/cookies">Cookies</a>
       </div>
     </div>
   </div>
