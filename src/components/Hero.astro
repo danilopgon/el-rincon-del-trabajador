@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import escaparateImg from "../../public/escaparate-el-rincon-del-trabajador.webp";
 import { CONTACT } from "../lib/contact";
 import NeedleSVG from "./icons/NeedleSVG.astro";
 ---
@@ -7,9 +9,9 @@ import NeedleSVG from "./icons/NeedleSVG.astro";
   <div class="wrap hero__container">
     <div class="heroA__grid">
       <div data-reveal>
-        <span class="eyebrow">Tarancón · Cuenca · 15 años de oficio</span>
+        <span class="eyebrow">Tarancón · Cuenca</span>
         <h1 class="heroA__title" style="margin-top:28px">
-          Vestimos a quien<br /><em>trabaja de verdad.</em>
+          Te vestimos<br /><em>para tu trabajo.</em>
         </h1>
         <p class="heroA__sub">
           Ropa laboral, EPI certificado y personalización con bordado o DTF desde una sola unidad.
@@ -19,6 +21,7 @@ import NeedleSVG from "./icons/NeedleSVG.astro";
           <a href="#contacto" class="btn btn--primary btn--lg">
             Pedir presupuesto
             <svg
+              aria-hidden="true"
               class="icon"
               viewBox="0 0 24 24"
               fill="none"
@@ -36,7 +39,7 @@ import NeedleSVG from "./icons/NeedleSVG.astro";
             target="_blank"
             rel="noopener noreferrer"
           >
-            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+            <svg aria-hidden="true" class="icon" viewBox="0 0 24 24" fill="currentColor">
               <path
                 d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm5.4 14.3c-.2.6-1.2 1.1-1.7 1.2-.5.1-1 .2-3.2-.7-2.7-1.1-4.4-3.9-4.5-4.1-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9 1-2.2.3-.3.6-.3.8-.3h.6c.2 0 .5 0 .7.5l1 2.3c.1.2.1.4 0 .5l-.4.5-.5.5c-.1.1-.3.3-.1.6.2.3.9 1.5 2 2.4 1.3 1.2 2.5 1.5 2.8 1.7.3.1.5.1.7-.1l.8-.9c.2-.2.4-.2.7-.1l2.2 1c.3.2.4.2.5.4.1.2.1 1-.2 1.5z"
               ></path>
@@ -58,12 +61,17 @@ import NeedleSVG from "./icons/NeedleSVG.astro";
       </div>
 
       <div class="heroA__media" data-reveal data-reveal-delay="120">
-        <img
-          src="/escaparante-el-rincon-del-trabajador.webp"
+        <Image
+          src={escaparateImg}
           alt="Escaparate de El Rincón del Trabajador"
-          width="800"
-          height="1000"
+          width={800}
+          height={1000}
           loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          widths={[400, 600, 800]}
+          sizes="(max-width: 800px) 100vw, 45vw"
+          quality={85}
         />
         <div class="heroA__sticker">
           <strong>15+</strong>
