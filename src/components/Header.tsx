@@ -4,7 +4,6 @@ import { CONTACT } from "../lib/contact";
 const NAV_LINKS = [
   { href: "#servicios", label: "Servicios" },
   { href: "#sectores", label: "Sectores" },
-  { href: "#personalizacion", label: "Personalización" },
   { href: "#tienda", label: "Tienda" },
   { href: CONTACT.blog, label: "Blog ↗", external: true },
   { href: "#contacto", label: "Contacto" },
@@ -35,6 +34,26 @@ export default function Header() {
     if (menuOpen) closeRef.current?.focus();
     return () => {
       document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    const toInert = [
+      document.querySelector<HTMLElement>("main"),
+      document.querySelector<HTMLElement>("footer"),
+      document.querySelector<HTMLElement>(".wa-fab"),
+    ].filter(Boolean) as HTMLElement[];
+
+    toInert.forEach((el) => {
+      if (menuOpen) {
+        el.setAttribute("inert", "");
+      } else {
+        el.removeAttribute("inert");
+      }
+    });
+
+    return () => {
+      toInert.forEach((el) => el.removeAttribute("inert"));
     };
   }, [menuOpen]);
 
@@ -69,6 +88,7 @@ export default function Header() {
           <div className="hdr__cta">
             <a href={`tel:${CONTACT.phone}`} className="hdr__phone">
               <svg
+                aria-hidden={true}
                 className="icon"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -84,6 +104,7 @@ export default function Header() {
             <a href="#contacto" className="btn btn--gold">
               Pedir presupuesto
               <svg
+                aria-hidden={true}
                 className="icon"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -98,6 +119,7 @@ export default function Header() {
           </div>
 
           <button
+            type="button"
             ref={burgerRef}
             className={`hdr__burger${menuOpen ? " is-open" : ""}`}
             onClick={() => setMenuOpen((v) => !v)}
@@ -139,6 +161,7 @@ export default function Header() {
             aria-label="Cerrar menú"
           >
             <svg
+              aria-hidden={true}
               width="20"
               height="20"
               viewBox="0 0 24 24"
@@ -170,6 +193,7 @@ export default function Header() {
         <div className="nav-drawer__footer">
           <a href={`tel:${CONTACT.phone}`} className="nav-drawer__phone">
             <svg
+              aria-hidden={true}
               width="18"
               height="18"
               viewBox="0 0 24 24"
@@ -191,6 +215,7 @@ export default function Header() {
           >
             Pedir presupuesto
             <svg
+              aria-hidden={true}
               width="18"
               height="18"
               viewBox="0 0 24 24"
