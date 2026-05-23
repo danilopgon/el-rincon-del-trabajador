@@ -1,0 +1,132 @@
+---
+import Base from "../layouts/Base.astro";
+import LegalShell from "../components/LegalShell.astro";
+import { CONTACT } from "../lib/contact";
+---
+
+<Base
+  title="Aviso Legal — El Rincón del Trabajador"
+  description="Aviso legal e información general de El Rincón del Trabajador S.L., conforme a la Ley 34/2002 de Servicios de la Sociedad de la Información."
+  noindex={true}
+>
+  <LegalShell title="Aviso Legal" updated="21 de mayo de 2026">
+    <h2>1. Información general del titular</h2>
+    <p>
+      En cumplimiento de lo dispuesto en el artículo 10 de la Ley 34/2002, de 11 de julio, de
+      Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se ponen a
+      disposición del usuario los siguientes datos identificativos del titular del sitio web:
+    </p>
+    <ul>
+      <li><strong>Denominación social:</strong> El Rincón del Trabajador S.L.</li>
+      <li><strong>CIF:</strong> B21904149</li>
+      <li><strong>Domicilio social:</strong> {CONTACT.address}</li>
+      <li>
+        <strong>Teléfono:</strong>
+        <a href={`tel:${CONTACT.phone}`}>{CONTACT.phoneDisplay}</a>
+      </li>
+      <li>
+        <strong>Correo electrónico:</strong>
+        <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+      </li>
+      <li>
+        <strong>Sitio web:</strong>
+        <a href="https://elrincondeltrabajador.es">elrincondeltrabajador.es</a>
+      </li>
+    </ul>
+
+    <h2>2. Objeto y ámbito de aplicación</h2>
+    <p>
+      El presente Aviso Legal regula el acceso y uso del sitio web <strong
+        >elrincondeltrabajador.es</strong
+      >
+      (en adelante, "el Sitio"), titularidad de El Rincón del Trabajador S.L. El acceso al Sitio y la
+      utilización de sus contenidos implica la aceptación plena y sin reservas de este Aviso Legal.
+    </p>
+    <p>
+      El Sitio tiene como finalidad ofrecer información sobre los productos y servicios de la
+      empresa (vestuario laboral, equipos de protección individual, personalización textil y
+      asesoramiento), así como facilitar el contacto con el negocio.
+    </p>
+
+    <h2>3. Condiciones de uso</h2>
+    <p>
+      El usuario se compromete a hacer un uso adecuado del Sitio y de los contenidos accesibles a
+      través del mismo, con sujeción a la ley, a las buenas costumbres y al presente Aviso Legal.
+      Queda expresamente prohibido:
+    </p>
+    <ul>
+      <li>
+        Reproducir, copiar, distribuir o modificar los contenidos del Sitio sin autorización expresa
+        por escrito del titular.
+      </li>
+      <li>Utilizar el Sitio con fines ilícitos, lesivos o contrarios al orden público.</li>
+      <li>
+        Introducir o difundir virus informáticos o cualquier otro sistema que pueda dañar los
+        sistemas de El Rincón del Trabajador S.L. o de terceros.
+      </li>
+      <li>
+        Realizar cualquier acto que pueda dañar, inutilizar o deteriorar el Sitio o impedir su
+        normal funcionamiento.
+      </li>
+    </ul>
+
+    <h2>4. Propiedad intelectual e industrial</h2>
+    <p>
+      El Sitio y sus contenidos (textos, imágenes, logotipos, diseño gráfico, código fuente y demás
+      elementos) son propiedad de El Rincón del Trabajador S.L. o, en su caso, de terceros
+      debidamente autorizados, y están protegidos por las leyes españolas e internacionales sobre
+      propiedad intelectual e industrial.
+    </p>
+    <p>
+      Queda prohibida cualquier reproducción, distribución, comunicación pública o transformación de
+      los contenidos del Sitio sin autorización expresa y por escrito de sus titulares, salvo en los
+      casos previstos por la ley.
+    </p>
+
+    <h2>5. Hipervínculos a terceros</h2>
+    <p>
+      El Sitio puede contener enlaces a páginas web de terceros (Instagram, Facebook, Google Maps,
+      blog corporativo en <a href={CONTACT.blog} target="_blank" rel="noopener noreferrer"
+        >blog.elrincondeltrabajador.es</a
+      >
+      u otras). El Rincón del Trabajador S.L. no controla ni se responsabiliza de los contenidos, políticas
+      de privacidad o prácticas de dichas páginas. Se recomienda al usuario revisar los aviso legales
+      y políticas de privacidad de cada sitio que visite.
+    </p>
+
+    <h2>6. Exención de responsabilidad</h2>
+    <p>
+      El Rincón del Trabajador S.L. no garantiza la disponibilidad y continuidad ininterrumpida del
+      Sitio ni que el mismo esté libre de errores. En la medida en que la legislación aplicable lo
+      permita, el titular excluye toda responsabilidad por los daños y perjuicios de cualquier
+      naturaleza que puedan derivarse del acceso o uso del Sitio, o de la imposibilidad de acceder a
+      él o usarlo.
+    </p>
+    <p>
+      El Rincón del Trabajador S.L. se reserva el derecho a modificar, suspender o cancelar, de
+      forma unilateral y sin previo aviso, el acceso al Sitio o a sus contenidos.
+    </p>
+
+    <h2>7. Protección de datos</h2>
+    <p>
+      El tratamiento de los datos personales de los usuarios se realiza conforme a lo establecido en
+      la <a href="/privacidad">Política de Privacidad</a>. Le recomendamos que la lea detenidamente.
+    </p>
+
+    <h2>8. Cookies</h2>
+    <p>
+      El Sitio utiliza tecnologías propias y de terceros para mejorar la experiencia del usuario.
+      Puede obtener más información en nuestra <a href="/cookies">Política de Cookies</a>.
+    </p>
+
+    <h2>9. Legislación aplicable y jurisdicción</h2>
+    <p>
+      El presente Aviso Legal se rige en todos y cada uno de sus extremos por la legislación
+      española. Para la resolución de cualquier controversia derivada del acceso o uso del Sitio,
+      las partes se someten, con renuncia expresa a cualquier otro fuero que pudiera
+      corresponderles, a la jurisdicción de los Juzgados y Tribunales de <strong>Cuenca</strong>,
+      salvo que la normativa de protección de consumidores y usuarios establezca una regla
+      imperativa distinta.
+    </p>
+  </LegalShell>
+</Base>

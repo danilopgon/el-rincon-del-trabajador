@@ -2,28 +2,20 @@
 import CornerFold from "./icons/CornerFold.astro";
 ---
 
-<section id="nosotros" class="section section--paper">
+<section id="nosotros" class="section">
   <div class="wrap">
     <div class="about__grid">
       <div class="about__media" data-reveal>
-        <!-- TODO: Replace with client photo, vertical aspect ratio 4/5, store interior/exterior -->
-        <div
-          style="width:100%;height:100%;background:var(--color-cream-deep);display:flex;align-items:center;justify-content:center;"
-        >
-          <svg
-            width="48"
-            height="48"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="var(--color-gold)"
-            stroke-width="1.5"
-          >
-            <rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"
-            ></circle><path d="m21 15-5-5L5 21"></path>
-          </svg>
-        </div>
+        <img
+          src="/interior.webp"
+          alt="Interior de El Rincón del Trabajador en Tarancón, con estanterías de calzado de seguridad y ropa laboral"
+          width="800"
+          height="1000"
+          loading="lazy"
+          decoding="async"
+        />
         <div class="about__badge">
-          <strong>+15</strong>años de oficio<br />en el sector
+          <strong>+15</strong>años de oficio
         </div>
         <div style="position:absolute;bottom:-1px;left:-1px;z-index:2">
           <CornerFold size={96} />
@@ -32,29 +24,29 @@ import CornerFold from "./icons/CornerFold.astro";
 
       <div class="about__copy" data-reveal>
         <span class="eyebrow">Quiénes somos</span>
-        <h2>Una tienda nueva<br />con mucho oficio detrás.</h2>
+        <h2>Nuestra experiencia<br />a tu servicio.</h2>
         <p>
-          El Rincón del Trabajador es la tienda en Tarancón; el oficio, en cambio, lleva quince años
-          puesto. Antes de abrir aquí vestíamos a empresas y particulares en otra tienda del sector,
-          aprendiendo qué prenda aguanta el lunes y qué hilo no se va al segundo lavado.
+          El Rincón del Trabajador es una tienda nueva, pero al frente está Rosa González, que lleva
+          más de quince años vistiendo a empresas y autónomos de Cuenca. Antes atendía en otra
+          tienda del sector, que con el tiempo cerró.
         </p>
         <p>
-          Hoy seguimos con la misma idea: que ninguna empresa ni autónomo de Cuenca tenga que
-          comprar uniforme por internet y rezar para que llegue. Tenemos máquina de bordar propia,
-          prensa de DTF y alguien al WhatsApp cuando hace falta.
-        </p>
-        <p>
-          No vendemos catálogos: vendemos prendas que aguantan y respondemos al teléfono el lunes a
-          las nueve.
+          Hoy abrimos puerta propia con la misma idea de siempre: que ninguna empresa ni autónomo de
+          la zona tenga que comprar uniforme a ciegas por internet. Bordado y DTF en casa,
+          asesoramiento por WhatsApp y stock real que se puede tocar antes de pedir.
         </p>
         <div class="about__sign">
           <div class="about__sign-img">
-            <!-- TODO: Replace with team avatar photo -->
-            <div style="width:100%;height:100%;background:var(--color-cream-deep)"></div>
+            <img
+              src="/rosa-gonzalez-rincon-trabajador.webp"
+              alt="Retrato de Rosa González"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <div>
-            <div class="about__sign-name">El equipo</div>
-            <div class="about__sign-role">Tarancón · Cuenca</div>
+            <div class="about__sign-name">Rosa González</div>
+            <div class="about__sign-role">Al frente de la tienda</div>
           </div>
         </div>
       </div>

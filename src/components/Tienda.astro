@@ -1,9 +1,10 @@
 ---
 import Icon from "./icons/Icon.astro";
 import { CONTACT } from "../lib/contact";
+import MapEmbed from "./MapEmbed";
 ---
 
-<section id="tienda" class="section">
+<section id="tienda" class="section section--paper">
   <div class="wrap">
     <div class="svc__head" data-reveal style="margin-bottom:40px">
       <div>
@@ -11,19 +12,13 @@ import { CONTACT } from "../lib/contact";
         <h2 style="margin-top:16px">Pásate, te atendemos<br />como toda la vida.</h2>
       </div>
       <p class="lead">
-        Estamos en pleno centro de Tarancón, a un paso de la N-400. Aparcamiento fácil en la zona.
-        Vente con la prenda vieja y te la comparamos.
+        Estamos cerca del Parque Ferial de Tarancon. Aparcamiento fácil en la zona. Vente con la
+        prenda vieja y asesoramos.
       </p>
     </div>
     <div class="shop__grid">
       <div class="shop__map" data-reveal>
-        <iframe
-          title="Mapa El Rincón del Trabajador"
-          src={CONTACT.mapsEmbed}
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          allowfullscreen
-          style="border:0;width:100%;height:100%"></iframe>
+        <MapEmbed client:load src={CONTACT.mapsEmbed} mapsUrl={CONTACT.mapsLink} />
       </div>
       <div class="shop__info" data-reveal>
         <div class="shop__row">

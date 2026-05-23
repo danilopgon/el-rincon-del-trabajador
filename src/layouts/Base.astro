@@ -1,20 +1,26 @@
 ---
 import "../styles/global.css";
 import { CONTACT } from "../lib/contact";
+import CookieBanner from "../components/CookieBanner";
 
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
+  canonical?: string;
 }
 
 const {
-  title = "El Rincón del Trabajador — Vestuario laboral, EPI y personalización en Tarancón",
+  title = "Vestuario laboral y EPI en Tarancón · El Rincón del Trabajador",
   description = "Ropa de trabajo, EPI certificado y bordado/DTF desde una unidad. Asesoramiento en tienda y por WhatsApp, en Tarancón (Cuenca) con 15 años de oficio en el sector.",
+  noindex = false,
 } = Astro.props;
+
+const canonical = Astro.props.canonical ?? new URL(Astro.url.pathname, Astro.site).toString();
 
 const schema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": "ClothingStore",
   name: "El Rincón del Trabajador",
   description,
   url: "https://elrincondeltrabajador.es",
@@ -28,6 +34,17 @@ const schema = {
     postalCode: "16400",
     addressCountry: "ES",
   },
+  image: "https://elrincondeltrabajador.es/og-image.png",
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 40.00804,
+    longitude: -3.01488,
+  },
+  priceRange: "€€",
+  sameAs: [
+    "https://www.instagram.com/rincondeltrabajador/",
+    "https://www.facebook.com/profile.php?id=61575998992211",
+  ],
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -52,56 +69,86 @@ const schema = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="El Rincón del Trabajador" />
+    <meta property="og:image" content={new URL("/og-image.png", Astro.site).toString()} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="El Rincón del Trabajador — Vestuario laboral y EPI en Tarancón"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL("/og-image.png", Astro.site).toString()} />
+    <meta name="theme-color" content="#24303f" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <noscript
+      ><style>
+        [data-reveal],
+        [data-reveal-stagger] > * {
+          opacity: 1 !important;
+        }
+      </style></noscript
+    >
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Saltar al contenido</a>
     <slot />
     <script>
       import { gsap } from "gsap";
       import { ScrollTrigger } from "gsap/ScrollTrigger";
       gsap.registerPlugin(ScrollTrigger);
 
-      // Single-element reveals
-      document.querySelectorAll("[data-reveal]").forEach((el) => {
-        gsap.fromTo(
-          el,
-          { y: 24, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.7,
-            ease: "power3.out",
-            delay: (Number((el as HTMLElement).dataset.revealDelay) || 0) / 1000,
-            scrollTrigger: {
-              trigger: el,
-              start: "top 88%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      });
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      // Stagger reveals (for card grids) — one trigger per parent, all children stagger together
-      gsap.utils.toArray<HTMLElement>("[data-reveal-stagger]").forEach((parent) => {
-        const children = Array.from((parent as HTMLElement).children);
-        gsap.fromTo(
-          children,
-          { y: 32, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.6,
-            stagger: 0.08,
-            ease: "power3.out",
-            scrollTrigger: { trigger: parent as HTMLElement, start: "top 88%" },
-          }
-        );
-      });
+      if (!prefersReduced) {
+        // Single-element reveals
+        document.querySelectorAll("[data-reveal]").forEach((el) => {
+          gsap.fromTo(
+            el,
+            { y: 24, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.7,
+              ease: "power3.out",
+              delay: (Number((el as HTMLElement).dataset.revealDelay) || 0) / 1000,
+              scrollTrigger: {
+                trigger: el,
+                start: "top 88%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
+        });
+
+        // Stagger reveals (for card grids) — one trigger per parent, all children stagger together
+        gsap.utils.toArray<HTMLElement>("[data-reveal-stagger]").forEach((parent) => {
+          const children = Array.from((parent as HTMLElement).children);
+          gsap.fromTo(
+            children,
+            { y: 32, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+              stagger: 0.08,
+              ease: "power3.out",
+              scrollTrigger: { trigger: parent as HTMLElement, start: "top 88%" },
+            }
+          );
+        });
+      }
     </script>
+    <CookieBanner client:idle />
   </body>
 </html>
