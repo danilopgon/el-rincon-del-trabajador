@@ -102,7 +102,7 @@ export default function FAQ() {
   const [open, setOpen] = useState(-1);
 
   return (
-    <section id="faq" className="section section--paper">
+    <section id="faq" className="section">
       <div className="wrap">
         <div className="faq__layout">
           <div>

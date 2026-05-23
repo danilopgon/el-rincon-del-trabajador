@@ -3,14 +3,14 @@
   --color-navy: #24303f;
   --color-navy-deep: #181f2a;
   --color-gold: #cca43b;
-  --color-gold-deep: #a8842a;
+  --color-gold-deep: #8a6d20;
   --color-brown: #4d341f;
   --color-brown-soft: #6b4a2e;
   --color-cream: #f7efd9;
   --color-cream-deep: #efe3c4;
   --color-paper: #faf6eb;
   --color-ink: #1a222d;
-  --color-muted: #6f6a5c;
+  --color-muted: #56513f;
 
   /* ===== Type ===== */
   --font-display: "Saira Condensed Variable", "Saira Condensed", system-ui, sans-serif;

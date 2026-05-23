@@ -1,30 +1,30 @@
 ---
-import Base from "../layouts/Base.astro";
+import About from "../components/About.astro";
+import CTABanner from "../components/CTABanner.astro";
+import Footer from "../components/Footer.astro";
 import Header from "../components/Header";
 import Hero from "../components/Hero.astro";
 import Marquee from "../components/Marquee.astro";
-import Servicios from "../components/Servicios.astro";
 import Sectores from "../components/Sectores.astro";
-import Personalizacion from "../components/Personalizacion";
-import About from "../components/About.astro";
+import Servicios from "../components/Servicios.astro";
 import Tienda from "../components/Tienda.astro";
-import FAQ from "../components/FAQ";
-import CTABanner from "../components/CTABanner.astro";
-import Footer from "../components/Footer.astro";
 import WhatsAppFab from "../components/WhatsAppFab.astro";
+import Base from "../layouts/Base.astro";
 ---
 
 <Base>
-  <Header client:load />
-  <main>
+  <Header client:idle />
+  <main id="main-content">
     <Hero />
     <Marquee />
     <Servicios />
     <Sectores />
-    <Personalizacion client:visible />
+    <!-- Ocultado hasta tener más imágenes de personalización -->
+    <!-- <Personalizacion client:visible /> -->
     <About />
     <Tienda />
-    <FAQ client:visible />
+    <!-- Ocultado hasta tener más claro el formato de las preguntas -->
+    <!-- <FAQ client:visible /> -->
     <CTABanner />
   </main>
   <Footer />
