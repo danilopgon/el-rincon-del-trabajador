@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+  updated: string;
+}
+
+const { title, updated } = Astro.props;
+---
+
+<section class="section section--paper">
+  <div class="wrap">
+    <nav class="legal__breadcrumb" aria-label="Ruta de navegación">
+      <a href="/">Inicio</a>
+      <span aria-hidden="true"> / </span>
+      <span aria-current="page">{title}</span>
+    </nav>
+    <div class="legal">
+      <h1>{title}</h1>
+      <p class="legal__updated">Última actualización: {updated}</p>
+      <slot />
+    </div>
+  </div>
+</section>
