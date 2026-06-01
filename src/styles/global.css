@@ -1,6 +1,5 @@
 @import "@fontsource/saira-condensed/700.css";
 @import "@fontsource/saira-condensed/800.css";
-@import "@fontsource/saira-condensed/900.css";
 @import "@fontsource-variable/inter-tight/wght.css";
 @import "tailwindcss";
 @import "./tokens.css";
@@ -30,6 +29,16 @@
   --d-radius: var(--radius-card);
   --d-radius-lg: var(--radius-card-lg);
   --max-w: var(--container-max);
+}
+
+/* ===== Scroll-reveal initial states ===== */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+}
+[data-reveal-stagger] > * {
+  opacity: 0;
+  transform: translateY(32px);
 }
 
 /* ===== Base reset ===== */

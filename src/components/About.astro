@@ -1,18 +1,24 @@
 ---
+import { Image } from "astro:assets";
 import CornerFold from "./icons/CornerFold.astro";
+import interiorImg from "../../public/interior.webp";
+import rosaImg from "../../public/rosa-gonzalez-rincon-trabajador.webp";
 ---
 
 <section id="nosotros" class="section">
   <div class="wrap">
     <div class="about__grid">
       <div class="about__media" data-reveal>
-        <img
-          src="/interior.webp"
+        <Image
+          src={interiorImg}
           alt="Interior de El Rincón del Trabajador en Tarancón, con estanterías de calzado de seguridad y ropa laboral"
-          width="800"
-          height="1000"
+          width={800}
+          height={1000}
           loading="lazy"
           decoding="async"
+          widths={[400, 600, 800]}
+          sizes="(max-width: 800px) 100vw, 40vw"
+          quality={85}
         />
         <div class="about__badge">
           <strong>+15</strong>años de oficio
@@ -37,9 +43,11 @@ import CornerFold from "./icons/CornerFold.astro";
         </p>
         <div class="about__sign">
           <div class="about__sign-img">
-            <img
-              src="/rosa-gonzalez-rincon-trabajador.webp"
+            <Image
+              src={rosaImg}
               alt="Retrato de Rosa González"
+              width={100}
+              height={100}
               loading="lazy"
               decoding="async"
             />

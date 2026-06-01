@@ -2,6 +2,8 @@
 import "../styles/global.css";
 import { CONTACT } from "../lib/contact";
 import CookieBanner from "../components/CookieBanner";
+import saira800Url from "@fontsource/saira-condensed/files/saira-condensed-latin-800-normal.woff2?url";
+import interTightUrl from "@fontsource-variable/inter-tight/files/inter-tight-latin-wght-normal.woff2?url";
 
 interface Props {
   title?: string;
@@ -90,12 +92,15 @@ const schema = {
     <meta name="twitter:image" content={new URL("/og-image.png", Astro.site).toString()} />
     <meta name="theme-color" content="#24303f" />
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preload" href={saira800Url} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={interTightUrl} as="font" type="font/woff2" crossorigin />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
     <noscript
       ><style>
         [data-reveal],
         [data-reveal-stagger] > * {
           opacity: 1 !important;
+          transform: none !important;
         }
       </style></noscript
     >
@@ -104,49 +109,61 @@ const schema = {
     <a href="#main-content" class="skip-link">Saltar al contenido</a>
     <slot />
     <script>
-      import { gsap } from "gsap";
-      import { ScrollTrigger } from "gsap/ScrollTrigger";
-      gsap.registerPlugin(ScrollTrigger);
-
       const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      if (!prefersReduced) {
-        // Single-element reveals
-        document.querySelectorAll("[data-reveal]").forEach((el) => {
-          gsap.fromTo(
-            el,
-            { y: 24, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.7,
-              ease: "power3.out",
-              delay: (Number((el as HTMLElement).dataset.revealDelay) || 0) / 1000,
-              scrollTrigger: {
-                trigger: el,
-                start: "top 88%",
-                toggleActions: "play none none none",
-              },
-            }
-          );
+      if (prefersReduced) {
+        document.querySelectorAll("[data-reveal], [data-reveal-stagger] > *").forEach((el) => {
+          (el as HTMLElement).style.cssText += ";opacity:1;transform:none";
         });
+      } else {
+        const run = async () => {
+          const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+            import("gsap"),
+            import("gsap/ScrollTrigger"),
+          ]);
+          gsap.registerPlugin(ScrollTrigger);
 
-        // Stagger reveals (for card grids) — one trigger per parent, all children stagger together
-        gsap.utils.toArray<HTMLElement>("[data-reveal-stagger]").forEach((parent) => {
-          const children = Array.from((parent as HTMLElement).children);
-          gsap.fromTo(
-            children,
-            { y: 32, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.6,
-              stagger: 0.08,
-              ease: "power3.out",
-              scrollTrigger: { trigger: parent as HTMLElement, start: "top 88%" },
-            }
-          );
-        });
+          document.querySelectorAll("[data-reveal]").forEach((el) => {
+            gsap.fromTo(
+              el,
+              { y: 24, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.7,
+                ease: "power3.out",
+                delay: (Number((el as HTMLElement).dataset.revealDelay) || 0) / 1000,
+                scrollTrigger: {
+                  trigger: el,
+                  start: "top 88%",
+                  toggleActions: "play none none none",
+                },
+              }
+            );
+          });
+
+          gsap.utils.toArray<HTMLElement>("[data-reveal-stagger]").forEach((parent) => {
+            const children = Array.from((parent as HTMLElement).children);
+            gsap.fromTo(
+              children,
+              { y: 32, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.6,
+                stagger: 0.08,
+                ease: "power3.out",
+                scrollTrigger: { trigger: parent as HTMLElement, start: "top 88%" },
+              }
+            );
+          });
+        };
+
+        if (typeof requestIdleCallback !== "undefined") {
+          requestIdleCallback(run);
+        } else {
+          setTimeout(run, 0);
+        }
       }
     </script>
     <CookieBanner client:idle />
