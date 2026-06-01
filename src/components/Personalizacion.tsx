@@ -54,7 +54,8 @@ export default function Personalizacion() {
             </h2>
             <p className="lead">
               Bordamos en máquina industrial con hilos de calidad y aplicamos DTF de gran
-              resistencia al lavado. Te enseñamos la prueba digital antes de hacer nada en tu prenda.
+              resistencia al lavado. Te enseñamos la prueba digital antes de hacer nada en tu
+              prenda.
             </p>
             <div className="pers__tabs" role="tablist">
               <button

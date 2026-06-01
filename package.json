@@ -23,7 +23,11 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "pnpm exec astro check",
-    "test": "echo \"No test suite configured\" && exit 0",
+    "test": "pnpm test:unit",
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:coverage": "vitest run --coverage",
     "quality": "pnpm lint && pnpm typecheck && pnpm format:check",
     "prepare": "simple-git-hooks"
   },
@@ -48,17 +52,25 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.60.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@typescript-eslint/eslint-plugin": "^8.59.4",
     "@typescript-eslint/parser": "^8.59.4",
+    "@vitejs/plugin-react": "^5.2.0",
+    "@vitest/coverage-v8": "4.1.8",
     "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^1.7.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.5.5",
     "eslint-plugin-sonarjs": "^4.0.3",
+    "jsdom": "^29.1.1",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
     "simple-git-hooks": "^2.13.1",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "4.1.8"
   }
 }
