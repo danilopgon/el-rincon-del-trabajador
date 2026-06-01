@@ -1,43 +1,74 @@
-# Astro Starter Kit: Minimal
+<p align="center">
+  <img src="public/logo-marca.png" alt="El Rincón del Trabajador" height="96" />
+</p>
 
-```sh
-npm create astro@latest -- --template minimal
+<h1 align="center">El Rincón del Trabajador</h1>
+
+<p align="center">
+  Sitio web de <strong>El Rincón del Trabajador</strong> — tienda de vestuario laboral, EPI certificado y personalización con bordado y DTF en Tarancón, Cuenca.
+</p>
+
+<p align="center">
+  <a href="https://elrincondeltrabajador.com" target="_blank">elrincondeltrabajador.com</a>
+</p>
+
+---
+
+## Stack
+
+| Capa               | Tecnología                                          |
+| ------------------ | --------------------------------------------------- |
+| Framework          | Astro 6 (SSG)                                       |
+| Islas interactivas | React 19 vía `@astrojs/react`                       |
+| Estilos            | TailwindCSS 4 (CSS-first, sin `tailwind.config.js`) |
+| Animaciones        | GSAP 3                                              |
+| Lenguaje           | TypeScript 6 (strict)                               |
+| Build              | Vite 7 (interno de Astro)                           |
+| Gestor de paquetes | pnpm 10                                             |
+| Node               | ≥ 22.12.0                                           |
+
+## Inicio rápido
+
+```bash
+pnpm install
+pnpm dev        # http://localhost:4321
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Comandos
 
-## 🚀 Project Structure
+| Comando              | Acción                                      |
+| -------------------- | ------------------------------------------- |
+| `pnpm dev`           | Servidor de desarrollo en `localhost:4321`  |
+| `pnpm build`         | Genera el sitio estático en `./dist/`       |
+| `pnpm preview`       | Previsualiza el build antes de desplegar    |
+| `pnpm quality`       | Lint + typecheck + format (gate de calidad) |
+| `pnpm test:unit`     | Tests unitarios con Vitest                  |
+| `pnpm test:e2e`      | Tests E2E con Playwright                    |
+| `pnpm test:coverage` | Cobertura de tests                          |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Calidad
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+`pnpm quality` ejecuta lint + typecheck + format check. Este comando corre automáticamente en cada commit vía `simple-git-hooks`.
+
+Los tests **no** forman parte del gate de pre-commit — se ejecutan en CI o manualmente.
+
+## Arquitectura de componentes
+
+- **Componentes Astro** — sin JS en cliente salvo indicación explícita: `Hero`, `Marquee`, `Servicios`, `Sectores`, `About`, `Tienda`, `CTABanner`, `Footer`, `WhatsAppFab`, `LegalShell`
+- **Islas React** — con estado o interactividad en cliente: `Header`, `FAQ`, `Personalizacion`, `CookieBanner`, `CookiePrefs`, `MapEmbed`
+- **Librerías TS puras** (`src/lib/`): `anim.ts`, `contact.ts`, `consent.ts`
+
+## Despliegue
+
+El sitio se despliega como SSG en hosting compartido (Apache) vía SCP con autenticación por clave SSH. La configuración de conexión se guarda en `.deploy.json` (gitignored).
+
+```bash
+# requiere .deploy.json configurado
+pnpm deploy
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+---
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+<p align="center">
+  Creado por <a href="https://danilopgon.com" target="_blank">danilopgon</a> y <a href="https://grajoestudio.dev/" target="_blank">Grajo Estudio</a>
+</p>
