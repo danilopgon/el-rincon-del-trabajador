@@ -28,7 +28,7 @@
     "test:unit:watch": "vitest",
     "test:e2e": "playwright test",
     "test:coverage": "vitest run --coverage",
-    "quality": "pnpm lint && pnpm typecheck && pnpm format:check",
+    "quality": "pnpm lint && pnpm typecheck && pnpm format:check && pnpm test:unit",
     "prepare": "simple-git-hooks"
   },
   "simple-git-hooks": {
