@@ -22,7 +22,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: process.env.CI ? "pnpm preview -- --host 127.0.0.1" : "pnpm dev",
+    command: process.env.CI ? "pnpm exec astro preview --host 127.0.0.1 --port 4321" : "pnpm dev",
+    timeout: 120 * 1000,
     url: previewUrl,
     reuseExistingServer: !process.env.CI,
   },
