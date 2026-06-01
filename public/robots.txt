@@ -4,4 +4,4 @@ Disallow: /aviso-legal
 Disallow: /privacidad
 Disallow: /cookies
 
-Sitemap: https://elrincondeltrabajador.es/sitemap-index.xml
+Sitemap: https://elrincondeltrabajador.com/sitemap-index.xml

@@ -78,3 +78,11 @@ Use [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:
 ### Pre-commit hook
 
 `simple-git-hooks` runs `pnpm quality` on every commit. If it fails, fix the underlying issue — never bypass with `--no-verify`.
+
+## Skills
+
+| Skill        | Trigger                              | Description                                                                                         |
+| ------------ | ------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| `deploy-ssh` | deploy, desplegar, publicar, hosting | Build + deploy via scp to shared hosting. Config in `.deploy.json` (gitignored). SSH key auth only. |
+
+Skill files: `.claude/skills/{name}/SKILL.md`

@@ -35,3 +35,6 @@ test-results/
 .claude/settings.local.json
 .atl/skill-registry.md
 .atl/.skill-registry.cache.json
+
+# Deploy config (connection metadata — no credentials, but gitignored by convention)
+/.deploy.json
