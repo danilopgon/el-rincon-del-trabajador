@@ -28,6 +28,7 @@
     "test:unit:watch": "vitest",
     "test:e2e": "playwright test",
     "test:coverage": "vitest run --coverage",
+    "generate:og": "node scripts/generate-og.mjs",
     "quality": "pnpm lint && pnpm typecheck && pnpm format:check && pnpm test:unit",
     "prepare": "simple-git-hooks"
   },
