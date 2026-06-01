@@ -101,4 +101,3 @@ HTML files remain on the server and link to `references/rsync-upgrade.md` for th
 ## References
 
 - `references/setup-ssh-key.md` — one-time SSH key setup on cPanel / shared hosting
-- `references/rsync-upgrade.md` — install rsync on Windows and upgrade the deploy command
