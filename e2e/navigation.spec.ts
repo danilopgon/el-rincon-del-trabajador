@@ -3,6 +3,7 @@ import { test, expect } from "@playwright/test";
 test.describe("Header navigation", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
+    await page.waitForLoadState("networkidle");
   });
 
   test("desktop nav shows all main links", async ({ page }) => {
