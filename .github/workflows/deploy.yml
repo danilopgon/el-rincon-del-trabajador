@@ -80,23 +80,32 @@ jobs:
           name: site-dist
           path: dist
 
-      - name: Print hosting public host key
-        run: ssh-keyscan -t ed25519 -p 18765 ssh.elrincondeltrabajador.com
-
       - name: Configure SSH
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          SSH_PASSPHRASE: ${{ secrets.SSH_PASSPHRASE }}
           SSH_PORT: ${{ secrets.SSH_PORT }}
         run: |
           test -n "$SSH_HOST"
           test -n "$SSH_KEY"
           test -n "$SSH_KNOWN_HOSTS"
+          test -n "$SSH_PASSPHRASE"
           mkdir -p ~/.ssh
           printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          cat > ~/.ssh/askpass.sh <<'EOF'
+          #!/usr/bin/env bash
+          printf '%s\n' "$SSH_PASSPHRASE"
+          EOF
+          chmod 700 ~/.ssh/askpass.sh
+          eval "$(ssh-agent -s)"
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
+          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
+          DISPLAY=:0 SSH_ASKPASS=~/.ssh/askpass.sh SSH_ASKPASS_REQUIRE=force ssh-add ~/.ssh/deploy_key < /dev/null
+          rm -f ~/.ssh/askpass.sh
 
       - name: Upload site to temporary directory
         env:
@@ -110,9 +119,9 @@ jobs:
           test -n "$SSH_USER"
           test "$REMOTE_PATH" != "/"
           remote_tmp="${REMOTE_PATH%/}/.deploy-${GITHUB_SHA}"
-          ssh -p "${SSH_PORT:-22}" -i ~/.ssh/deploy_key "$SSH_USER@$SSH_HOST" \
+          ssh -o BatchMode=yes -p "${SSH_PORT:-22}" "$SSH_USER@$SSH_HOST" \
             "set -eu; test -d '$REMOTE_PATH'; rm -rf '$remote_tmp'; mkdir -p '$remote_tmp'"
-          scp -rP "${SSH_PORT:-22}" -i ~/.ssh/deploy_key dist/. "$SSH_USER@$SSH_HOST:$remote_tmp/"
+          scp -o BatchMode=yes -rP "${SSH_PORT:-22}" dist/. "$SSH_USER@$SSH_HOST:$remote_tmp/"
 
       - name: Publish uploaded site
         env:
@@ -126,5 +135,5 @@ jobs:
           test -n "$SSH_USER"
           test "$REMOTE_PATH" != "/"
           remote_tmp="${REMOTE_PATH%/}/.deploy-${GITHUB_SHA}"
-          ssh -p "${SSH_PORT:-22}" -i ~/.ssh/deploy_key "$SSH_USER@$SSH_HOST" \
+          ssh -o BatchMode=yes -p "${SSH_PORT:-22}" "$SSH_USER@$SSH_HOST" \
             "set -eu; test -n '$REMOTE_PATH'; test '$REMOTE_PATH' != '/'; test -d '$REMOTE_PATH'; test -d '$remote_tmp'; find '$REMOTE_PATH' -mindepth 1 -maxdepth 1 ! -name '.deploy-${GITHUB_SHA}' -exec rm -rf -- {} +; cp -a '$remote_tmp'/. '$REMOTE_PATH'/; rm -rf '$remote_tmp'"
