@@ -80,6 +80,9 @@ jobs:
           name: site-dist
           path: dist
 
+      - name: Print hosting public host key
+        run: ssh-keyscan -t ed25519 -p 18765 ssh.elrincondeltrabajador.com
+
       - name: Configure SSH
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
