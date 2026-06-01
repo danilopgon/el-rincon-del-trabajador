@@ -1,5 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const previewHost = process.env.CI ? "127.0.0.1" : "localhost";
+const previewUrl = `http://${previewHost}:4321`;
+
 export default defineConfig({
   testDir: "./e2e",
   fullyParallel: true,
@@ -8,7 +11,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: "html",
   use: {
-    baseURL: "http://localhost:4321",
+    baseURL: previewUrl,
     trace: "on-first-retry",
     reducedMotion: "reduce",
   },
@@ -19,8 +22,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "pnpm dev",
-    url: "http://localhost:4321",
+    command: process.env.CI ? "pnpm preview -- --host 127.0.0.1" : "pnpm dev",
+    url: previewUrl,
     reuseExistingServer: !process.env.CI,
   },
 });

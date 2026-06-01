@@ -1,0 +1,127 @@
+name: Quality, E2E and deploy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Verify site
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.18.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run quality gate
+        run: pnpm quality
+
+      - name: Build site
+        run: pnpm build
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run E2E tests
+        run: pnpm test:e2e
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-dist
+          path: dist
+          if-no-files-found: error
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
+          if-no-files-found: ignore
+
+  deploy:
+    name: Deploy to hosting
+    needs: verify
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    environment: production
+
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: dist
+
+      - name: Configure SSH
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+        run: |
+          test -n "$SSH_HOST"
+          test -n "$SSH_KEY"
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+      - name: Upload site to temporary directory
+        env:
+          REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          test -n "$REMOTE_PATH"
+          test -n "$SSH_HOST"
+          test -n "$SSH_USER"
+          test "$REMOTE_PATH" != "/"
+          remote_tmp="${REMOTE_PATH%/}/.deploy-${GITHUB_SHA}"
+          ssh -p "${SSH_PORT:-22}" -i ~/.ssh/deploy_key "$SSH_USER@$SSH_HOST" \
+            "set -eu; test -d '$REMOTE_PATH'; rm -rf '$remote_tmp'; mkdir -p '$remote_tmp'"
+          scp -rP "${SSH_PORT:-22}" -i ~/.ssh/deploy_key dist/. "$SSH_USER@$SSH_HOST:$remote_tmp/"
+
+      - name: Publish uploaded site
+        env:
+          REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          test -n "$REMOTE_PATH"
+          test -n "$SSH_HOST"
+          test -n "$SSH_USER"
+          test "$REMOTE_PATH" != "/"
+          remote_tmp="${REMOTE_PATH%/}/.deploy-${GITHUB_SHA}"
+          ssh -p "${SSH_PORT:-22}" -i ~/.ssh/deploy_key "$SSH_USER@$SSH_HOST" \
+            "set -eu; test -n '$REMOTE_PATH'; test '$REMOTE_PATH' != '/'; test -d '$REMOTE_PATH'; test -d '$remote_tmp'; find '$REMOTE_PATH' -mindepth 1 -maxdepth 1 ! -name '.deploy-${GITHUB_SHA}' -exec rm -rf -- {} +; cp -a '$remote_tmp'/. '$REMOTE_PATH'/; rm -rf '$remote_tmp'"
