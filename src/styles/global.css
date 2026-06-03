@@ -365,19 +365,22 @@ button {
   background: var(--bg-alt);
   padding: 22px 0;
   overflow: hidden;
-  position: relative; /* ensures overflow:hidden clips animated children on iOS Safari */
-  will-change: transform; /* promote container, not track, to fix iOS compositing clip bug */
+  position: relative;
+  transform: translateZ(0);
 }
 .marquee__track {
   display: flex;
-  gap: 56px;
+  gap: 0;
+  width: max-content;
   animation: marq 36s linear infinite;
   white-space: nowrap;
+  will-change: transform;
 }
 .marquee__item {
   display: inline-flex;
   align-items: center;
   gap: 18px;
+  padding-right: 56px;
   font-family: var(--f-display);
   text-transform: uppercase;
   font-size: 20px;
