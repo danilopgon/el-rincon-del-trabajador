@@ -79,10 +79,7 @@ Use [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:
 
 `simple-git-hooks` runs `pnpm quality` on every commit. If it fails, fix the underlying issue — never bypass with `--no-verify`.
 
-## Skills
+## Deploy
 
-| Skill        | Trigger                              | Description                                                                                         |
-| ------------ | ------------------------------------ | --------------------------------------------------------------------------------------------------- |
-| `deploy-ssh` | deploy, desplegar, publicar, hosting | Build + deploy via scp to shared hosting. Config in `.deploy.json` (gitignored). SSH key auth only. |
-
-Skill files: `.claude/skills/{name}/SKILL.md`
+Push to `main` — GitHub Actions runs quality gate, E2E tests, and deploys automatically via SSH.
+See `.github/workflows/deploy.yml` for details.

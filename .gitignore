@@ -36,5 +36,5 @@ test-results/
 .atl/skill-registry.md
 .atl/.skill-registry.cache.json
 
-# Deploy config (connection metadata — no credentials, but gitignored by convention)
+# Local deploy config (connection metadata, not for the repo)
 /.deploy.json
