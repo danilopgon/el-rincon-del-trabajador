@@ -202,7 +202,7 @@ export const slides = [
     screenshotSrc: "assets/web-screenshot.png",
     browserMarginTop: 28,
     features: [
-      { title: "Hero editorial", desc: "Foto a sangre y tipografía que manda." },
+      { title: "Hero editorial", desc: "Tipografía dominante." },
       { title: "Cuatro servicios", desc: "Ropa, EPI, bordado y asesoramiento." },
       { title: "WhatsApp a un toque", desc: "Presupuesto sin pasar por la tienda." },
       { title: "Rápida y accesible", desc: "Posicionada en Google desde el primer día." },
