@@ -110,7 +110,9 @@ const schema = {
     >
   </head>
   <body>
-    <a href="#main-content" class="skip-link">Saltar al contenido</a>
+    <nav class="skip-nav" aria-label="Accesos rápidos">
+      <a href="#main-content" class="skip-link">Saltar al contenido</a>
+    </nav>
     <slot />
     <script>
       const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

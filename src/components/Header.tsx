@@ -81,6 +81,7 @@ export default function Header() {
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               >
                 {label}
+                {external ? <span className="sr-only"> (abre en nueva pestaña)</span> : null}
               </a>
             ))}
           </nav>
@@ -185,6 +186,7 @@ export default function Header() {
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               >
                 {label}
+                {external ? <span className="sr-only"> (abre en nueva pestaña)</span> : null}
               </a>
             </li>
           ))}

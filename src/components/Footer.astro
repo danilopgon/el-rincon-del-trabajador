@@ -56,13 +56,15 @@ import { CONTACT } from "../lib/contact";
           <li><a href={`tel:${CONTACT.phone}`}>{CONTACT.phoneDisplay}</a></li>
           <li><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></li>
           <li>
-            <a href={CONTACT.blog} target="_blank" rel="noopener noreferrer">Blog ↗</a>
+            <a href={CONTACT.blog} target="_blank" rel="noopener noreferrer"
+              >Blog ↗<span class="sr-only"> (abre en nueva pestaña)</span></a
+            >
           </li>
         </ul>
         <div class="ftr__social" style="margin-top:18px">
           <a
             href="https://www.instagram.com/rincondeltrabajador/"
-            aria-label="Instagram"
+            aria-label="Instagram (abre en nueva pestaña)"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -70,7 +72,7 @@ import { CONTACT } from "../lib/contact";
           </a>
           <a
             href="https://www.facebook.com/profile.php?id=61575998992211"
-            aria-label="Facebook"
+            aria-label="Facebook (abre en nueva pestaña)"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -78,7 +80,7 @@ import { CONTACT } from "../lib/contact";
           </a>
           <a
             href={CONTACT.whatsapp}
-            aria-label="WhatsApp"
+            aria-label="WhatsApp (abre en nueva pestaña)"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -95,7 +97,7 @@ import { CONTACT } from "../lib/contact";
         <a href="/cookies">Cookies</a>
         <span style="opacity:0.5">·</span>
         <a href="https://grajoestudio.dev/" target="_blank" rel="noopener noreferrer"
-          >Creado por Grajo Estudio</a
+          >Creado por Grajo Estudio<span class="sr-only"> (abre en nueva pestaña)</span></a
         >
       </div>
     </div>

@@ -52,6 +52,7 @@ export default function MapEmbed({ src, mapsUrl }: Props) {
         </button>
         <a href={mapsUrl} className="btn btn--ghost" target="_blank" rel="noopener noreferrer">
           Abrir en Google Maps
+          <span className="sr-only"> (abre en nueva pestaña)</span>
         </a>
       </div>
     </div>

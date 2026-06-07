@@ -27,11 +27,7 @@ const sectors = [
     <div class="sect__grid" data-reveal>
       {
         sectors.map((s) => (
-          <a
-            href="#contacto"
-            class="sect__cell"
-            aria-label={`${s.title}: ${s.meta} — pedir presupuesto`}
-          >
+          <a href="#contacto" class="sect__cell">
             <Icon name={s.icon} width="36" height="36" class="sect__cell-icon" />
             <div class="sect__cell-arrow">
               <Icon name="arrowUR" width="20" height="20" />

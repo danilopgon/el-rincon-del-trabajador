@@ -916,6 +916,7 @@ button {
   opacity: 0.75;
   line-height: 1.6;
 }
+.ftr h3,
 .ftr h4 {
   font-family: var(--f-display);
   text-transform: uppercase;
@@ -980,6 +981,18 @@ button {
   background: transparent;
   color: inherit;
   padding: 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ========== WhatsApp flotante ========== */
@@ -1497,6 +1510,10 @@ button {
 }
 
 /* ========== Skip link ========== */
+.skip-nav {
+  position: relative;
+  z-index: 9999;
+}
 .skip-link {
   position: absolute;
   left: -9999px;

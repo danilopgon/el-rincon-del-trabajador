@@ -32,11 +32,11 @@
 
 **Strict TDD mode is active.** Tests go before or alongside implementation — never after.
 
-| Layer                    | Tool                                                 | Command              |
-| ------------------------ | ---------------------------------------------------- | -------------------- |
-| Unit + Component (React) | Vitest 5.0.0-beta.4 + jsdom + @testing-library/react | `pnpm test:unit`     |
-| E2E                      | Playwright 1.60                                      | `pnpm test:e2e`      |
-| Coverage                 | @vitest/coverage-v8                                  | `pnpm test:coverage` |
+| Layer                    | Tool                                          | Command              |
+| ------------------------ | --------------------------------------------- | -------------------- |
+| Unit + Component (React) | Vitest 4.1.8 + jsdom + @testing-library/react | `pnpm test:unit`     |
+| E2E                      | Playwright 1.60                               | `pnpm test:e2e`      |
+| Coverage                 | @vitest/coverage-v8                           | `pnpm test:coverage` |
 
 **Watch mode**: `pnpm test:unit:watch`
 
@@ -46,7 +46,7 @@ No `.astro` unit tests — only React TSX islands and pure TS libs are unit-test
 
 ### Gotcha — Vitest version
 
-Vitest 3.x is broken on npm (no `vite-node@3.x` on registry). This project pins **Vitest 5.0.0-beta.4** — the only version compatible with Vite 7 at install time. Do not upgrade without checking registry availability.
+Vitest 3.x is broken on npm (no `vite-node@3.x` on registry). This project pins **Vitest 4.1.8** — the only version compatible with Vite 7 at install time. Do not upgrade without checking registry availability.
 
 ### Gotcha — ESLint globals in tests
 
@@ -59,13 +59,13 @@ Use `@vitejs/plugin-react@5.2.0` for Vite 7. v6 requires Vite ^8 and is incompat
 ## Quality Gate
 
 ```
-pnpm quality    # lint + typecheck + format:check (runs on pre-commit via simple-git-hooks)
+pnpm quality    # lint + typecheck + format:check + test:unit (runs on pre-commit via simple-git-hooks)
 pnpm lint       # ESLint 10
 pnpm typecheck  # astro check + tsc --noEmit
 pnpm format:check  # Prettier 3
 ```
 
-Tests are NOT part of `pnpm quality` or the pre-commit hook — they run separately (CI or manually).
+`pnpm test:unit` is part of `pnpm quality` and therefore runs on every commit via the pre-commit hook.
 
 ## Dev Workflow
 
