@@ -31,6 +31,10 @@ Thumbs.db
 playwright-report/
 test-results/
 
+# Carousel IG — generated output (re-created by node carousel/build.mjs)
+carousel/slides/
+carousel/index.html.bak
+
 # Claude local settings
 .claude/settings.local.json
 .atl/skill-registry.md
