@@ -137,7 +137,7 @@ export const slides = [
     counter: 5,
     eyebrow: "El sistema",
     eyebrowMarginTop: 56,
-    headlineHtml: "Paleta, tipo y marca<br />en su sitio.",
+    headlineHtml: "Paleta, tipo y marca",
     headlineFontSize: 58,
     headlineMarginTop: 26,
     swatchesMarginTop: 38,
