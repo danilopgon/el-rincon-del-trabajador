@@ -31,21 +31,31 @@
 /* ===== Non-Tailwind tokens (componentes / utilidades sueltas) ===== */
 :root {
   --c-line: rgba(36, 48, 63, 0.12);
+  --c-wash: rgba(36, 48, 63, 0.07);
+  --c-zebra: rgba(36, 48, 63, 0.04);
+  --c-scrim: rgba(24, 31, 42, 0.52);
+  --c-shade: rgba(24, 31, 42, 0.18);
+  --c-cream-line: rgba(247, 239, 217, 0.14);
+  --c-cream-edge: rgba(247, 239, 217, 0.35);
+  --c-cream-ghost: rgba(247, 239, 217, 0.55);
+  --c-cream-soft: rgba(247, 239, 217, 0.75);
+  --c-whatsapp: #25d366;
+  --c-whatsapp-ink: #0a2e1e;
   --section-pad-y: 96px;
   --section-pad-x: 64px;
   --section-gap: 24px;
 }
 
 /* ===== Body defaults ===== */
+/* overflow-x: clip prevents horizontal scroll from off-screen fixed/transformed elements
+   (nav drawer, marquee). Using clip not hidden so position:fixed stays viewport-relative. */
 html,
 body {
   margin: 0;
   padding: 0;
+  overflow-x: clip;
 }
 body {
-  /* overflow-x: clip prevents horizontal scroll from off-screen fixed/transformed elements
-     (nav drawer, marquee). Using clip not hidden so position:fixed stays viewport-relative. */
-  overflow-x: clip;
   background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-sans);
@@ -62,10 +72,12 @@ h3 {
   font-family: var(--font-display);
   font-weight: 800;
   letter-spacing: -0.01em;
-  line-height: 0.95;
+  line-height: 1;
   color: var(--color-navy);
   text-transform: uppercase;
   text-wrap: balance;
+  overflow-wrap: break-word;
+  min-width: 0;
   margin: 0;
 }
 h1 {
@@ -83,20 +95,12 @@ p {
   text-wrap: pretty;
 }
 
-/* ===== Eyebrow ===== */
-.eyebrow {
-  font-size: 13px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--color-gold-deep);
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-.eyebrow::before {
-  content: "";
-  width: 28px;
-  height: 2px;
+/* ===== Browser surfaces ===== */
+::selection {
   background: var(--color-gold);
+  color: var(--color-navy);
+}
+html {
+  caret-color: var(--color-navy);
+  scrollbar-color: var(--color-muted) var(--color-paper);
 }

@@ -69,7 +69,7 @@ export default function Header() {
             <img src="/logo-marca.png" alt="El Rincón del Trabajador" width={37} height={52} />
             <div className="hdr__logo-text">
               <strong>El Rincón</strong>
-              <span>del Trabajador</span>
+              <span className="hdr__wordmark-sub">del Trabajador</span>
             </div>
           </a>
 
@@ -152,7 +152,7 @@ export default function Header() {
             <img src="/logo-marca.png" alt="El Rincón del Trabajador" width={30} height={42} />
             <div className="hdr__logo-text">
               <strong>El Rincón</strong>
-              <span>del Trabajador</span>
+              <span className="hdr__wordmark-sub">del Trabajador</span>
             </div>
           </a>
           <button

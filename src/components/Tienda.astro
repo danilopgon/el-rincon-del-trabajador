@@ -4,15 +4,12 @@ import { CONTACT } from "../lib/contact";
 import MapEmbed from "./MapEmbed";
 ---
 
-<section id="tienda" class="section section--paper">
+<section id="tienda" class="section">
   <div class="wrap">
     <div class="svc__head" data-reveal style="margin-bottom:40px">
-      <div>
-        <span class="eyebrow">La tienda</span>
-        <h2 style="margin-top:16px">Pásate, te atendemos<br />como toda la vida.</h2>
-      </div>
+      <h2>Pásate, te atendemos<br />como toda la vida.</h2>
       <p class="lead">
-        Estamos cerca del Parque Ferial de Tarancon. Aparcamiento fácil en la zona. Ven con la
+        Estamos cerca del Parque Ferial de Tarancón. Aparcamiento fácil en la zona. Ven con la
         prenda vieja y te asesoramos.
       </p>
     </div>
@@ -41,7 +38,7 @@ import MapEmbed from "./MapEmbed";
             <strong>Teléfono</strong>
             <p>
               <a href={`tel:${CONTACT.phone}`}>{CONTACT.phoneDisplay}</a>
-              &nbsp;·&nbsp;
+              <br />
               <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer"
                 >WhatsApp<span class="sr-only"> (abre en nueva pestaña)</span></a
               >

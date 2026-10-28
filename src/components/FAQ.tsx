@@ -106,8 +106,7 @@ export default function FAQ() {
       <div className="wrap">
         <div className="faq__layout">
           <div>
-            <span className="eyebrow">Preguntas frecuentes</span>
-            <h2 style={{ marginTop: 16 }}>
+            <h2>
               Lo que más
               <br />
               nos preguntáis.
@@ -118,7 +117,7 @@ export default function FAQ() {
                 href={CONTACT.whatsapp}
                 style={{ color: "var(--color-gold-deep)", fontWeight: 600 }}
               >
-                Escríbenos por WhatsApp →
+                Escríbenos por WhatsApp
               </a>
             </p>
           </div>

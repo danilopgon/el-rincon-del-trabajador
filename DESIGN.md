@@ -42,25 +42,33 @@ Verdes adicionales para WhatsApp FAB: fondo `#25D366`, texto `#0A2E1E`.
 
 ### 1.3 Tipografía
 
-| Rol             | Font                | Weights            | Donde                                                           |
-| --------------- | ------------------- | ------------------ | --------------------------------------------------------------- |
-| Display         | **Saira Condensed** | 700, 800, 900      | Todos los H1–H3, eyebrows mayúsculas, números grandes, botones. |
-| Body            | **Inter Tight**     | 400, 500, 600, 700 | Texto cuerpo, botones, navegación.                              |
-| Mono (opcional) | JetBrains Mono      | 400                | Reservado para futuro (referencias, códigos de producto).       |
+| Rol             | Font                | Weights            | Donde                                                     |
+| --------------- | ------------------- | ------------------ | --------------------------------------------------------- |
+| Display         | **Saira Condensed** | 700, 800, 900      | Todos los H1–H3, números grandes, marquee.                |
+| Body            | **Inter Tight**     | 400, 500, 600, 700 | Texto cuerpo, botones, navegación.                        |
+| Mono (opcional) | JetBrains Mono      | 400                | Reservado para futuro (referencias, códigos de producto). |
 
 **Características OpenType**: `font-feature-settings: "ss01", "cv11"` en `<body>`.
 
 **Escala**
 
 ```
-h1        clamp(56px, 7.6vw, 132px)   line-height 0.95   letter-spacing -0.01em   UPPER
-heroA__t  clamp(64px, 9.5vw, 150px)   line-height 0.86   letter-spacing -0.02em   UPPER
-h2        clamp(40px,  5vw,  84px)    line-height 0.95   letter-spacing -0.01em   UPPER
+h1        clamp(56px, 7.6vw, 132px)   line-height 1      letter-spacing -0.01em   UPPER
+heroA__t  clamp(56px, 7.4vw, 112px)   line-height 1      letter-spacing -0.02em   UPPER
+h2        clamp(40px,  5vw,  84px)    line-height 1      letter-spacing -0.01em   UPPER
 h3        clamp(22px, 1.8vw,  28px)   line-height 1.05                            UPPER
 lead      clamp(18px, 1.4vw,  22px)   line-height 1.45
 body      17px / 1.55
-eyebrow   13px UPPER  letter-spacing 0.14em  weight 600  color: gold-deep
+label     14px  Inter Tight  sentence case  sin tracking  weight 500–600  color: muted
 ```
+
+**Reglas (Hallmark polish, 2026-10-28)**
+
+- Sin eyebrows: ninguna línea pequeña encima de un heading que solo lo anuncia. Si el heading es figurativo, la etiqueta pasa a ser el heading.
+- Mayúsculas solo en el display (Saira) y en el wordmark. Etiquetas, metadatos, captions y cabeceras de tabla van en Inter Tight, sentence case, sin letter-spacing.
+- Heading de un solo color y un solo peso: nada de palabra resaltada en dorado. El dorado sobre crema no llega a 3:1, así que no se usa para texto sobre crema.
+- Caps con line-height mínimo 1.
+- Sin "·" como separador de metadatos (solo en el marquee); usar "y", comas o saltos de línea.
 
 Todos los headings llevan `text-wrap: balance`; los párrafos `text-wrap: pretty`.
 
@@ -104,7 +112,7 @@ Todos los headings llevan `text-wrap: balance`; los párrafos `text-wrap: pretty
 - `.section--paper { background: var(--c-paper); }` — fondo levemente más cálido para alternancia.
 - `.section--navy` — fondo navy, texto crema.
 
-**Patrón de alternancia**: Hero (cream) → Marquee (paper) → Servicios (cream) → Sectores (paper) → Personalización (cream) → About (paper) → Tienda (cream) → FAQ (paper) → CTA (navy) → Footer (navy-deep).
+**Patrón de alternancia**: Hero (cream) → Marquee (paper) → Servicios (cream) → Sectores (paper) → Proveedores (cream) → About (paper) → Tienda (cream) → CTA (navy) → Footer (navy-deep). Personalización y FAQ están ocultas en `index.astro`.
 
 ### 2.3 Responsive
 
@@ -133,11 +141,10 @@ Grid de 2 columnas `1.1fr 0.9fr`, gap 48px, alineadas al fondo.
 
 **Columna izquierda**
 
-1. Eyebrow con localización y años de oficio.
-2. H1 grande con énfasis en la segunda línea: `<em>` con `color: var(--c-gold)` y highlight detrás (`::after` absoluto a 18% opacity, altura 14% desde abajo).
-3. Subtítulo (18px, max-width 48ch).
-4. Acciones (gap 12px): botón primary (ancla `#contacto`) + botón ghost "WhatsApp" con icono.
-5. Metadatos en fila (gap 28px): tres ítems con cifra destacada + etiqueta descriptiva.
+1. H1 grande en navy, dos líneas ("Te vestimos / para tu trabajo.").
+2. Subtítulo (18px, max-width 48ch).
+3. Acciones (gap 12px): botón primary (ancla `#contacto`) + botón ghost "WhatsApp" con icono.
+4. Metadatos en fila (gap 28px): tres ítems con cifra destacada + etiqueta descriptiva.
 
 **Columna derecha**
 
@@ -159,19 +166,18 @@ Animación: scroll horizontal infinito 36s linear. Duplicar el array de items pa
 
 ## 6. Servicios (`#servicios`)
 
-**Head** (flex space-between, gap 32): eyebrow + H2 a la izquierda; párrafo lead a la derecha.
+**Head** (flex space-between, gap 32): H2 a la izquierda; párrafo lead a la derecha.
 
 **Grid** de 4 cards (`repeat(4, 1fr); gap: 24px`).
 
 **Card** (padding 28, border 1px line, fondo paper):
 
 - Imagen 4:3 sangrada al borde superior con bleed negativo (`margin: -28px -28px 8px`). Hover: `scale(1.05)` 500ms.
-- Numerador en Saira 600 13px letter-spacing 0.12em color gold-deep.
 - H3 (24px UPPER weight 800).
 - Descripción (14px muted).
 - Lista de ítems con bullet dorado (4px circle).
 
-Hover de la card: `translateY(-4px)`, borde dorado.
+Hover de la card: `translateY(-4px)`, borde dorado. La imagen no se mueve.
 
 **Servicios** (4 cards):
 
@@ -186,7 +192,7 @@ Hover de la card: `translateY(-4px)`, borde dorado.
 
 ## 7. Sectores (`#sectores`, paper)
 
-Head con eyebrow + H2 + lead explicando la cobertura geográfica y normativa.
+Head con H2 + lead explicando la cobertura geográfica y normativa.
 
 **Grid 6×1** (responsive 3×2 → 2×3): borde exterior 1px line, celdas separadas por borders.
 
@@ -194,7 +200,7 @@ Head con eyebrow + H2 + lead explicando la cobertura geográfica y normativa.
 
 - Icono outline 36×36 color gold (top-left).
 - Flecha `arrow-up-right` 20×20 color navy opacity 0.4 (top-right).
-- Meta (12px UPPER letter-spacing 0.08em color muted weight 600).
+- Meta (14px Inter Tight, sentence case, color muted weight 500).
 - Título (Saira 800 22px UPPER, margin-top auto).
 
 Hover: fondo navy, texto cream, flecha gold, meta cream/70%.
@@ -212,13 +218,25 @@ Hover: fondo navy, texto cream, flecha gold, meta cream/70%.
 
 ---
 
+## 7b. Proveedores (`#proveedores`, cream)
+
+Head con H2 ("Las marcas que trabajamos") + lead.
+
+**Lista** de dos columnas (`repeat(2, minmax(0, 1fr))`, column-gap 64, una columna bajo 800px), filas separadas por hairline `var(--c-line)`:
+
+- Nombre de la marca en Saira 800 26px UPPER, navy.
+- Qué fabrica (15px muted).
+- Enlace "Ver catálogo" (o "Catálogo en PDF") a la derecha: 15px weight 600, subrayado dorado de 2px, icono `arrowUR`, `target="_blank"` con aviso sr-only.
+
+Sin logos de marca (no tenemos permiso de uso). Los enlaces y la descripción de cada marca viven en `src/components/Proveedores.astro`.
+
 ## 8. Personalización (`#personalizacion`)
 
 Grid `0.95fr 1.05fr`, gap 64.
 
 **Columna izquierda**
 
-- Eyebrow + H2 + lead.
+- H2 + lead.
 - **Tabs** (margin-top 32, gap 8): "Bordado profesional" / "DTF a color". Border 1px line, border-radius 999px, padding 10/18, 13px weight 600. El activo es navy/cream.
 - **Stats** (gap 40, padding-top 24, border-top 1px line): pedido mínimo + plazo habitual de prueba.
 
@@ -230,7 +248,7 @@ Grid `0.95fr 1.05fr`, gap 64.
 [ img 200px ][ img 200px ]
 ```
 
-Cada imagen lleva un tag en absolute bottom-left (`bg: navy, color: cream, 11px UPPER letter-spacing 0.1em padding 6/10`).
+Cada imagen lleva un tag en absolute bottom-left (`bg: navy, color: cream, 13px weight 600, sentence case, padding 4/8`).
 
 Al cambiar de tab, la galería se reemplaza (estado local — React island).
 
@@ -248,7 +266,7 @@ Grid 1fr 1fr, gap 64, align items center.
 
 **Der — copy**:
 
-- Eyebrow + H2 + tres párrafos (17px line-height 1.65, max-width 52ch).
+- H2 ("Quiénes somos") + párrafos (17px line-height 1.65, max-width 52ch).
 - Firma al pie (margin-top 36, border-top 1px line, padding-top 24): avatar circular 56×56 + nombre en Saira 700 16px UPPER + localización.
 
 ---
@@ -276,7 +294,7 @@ Debajo: dos botones (primary "Cómo llegar" + ghost "WhatsApp").
 
 Grid `0.7fr 1.3fr`, gap 64.
 
-**Izq**: eyebrow + H2 + nota con link a WhatsApp para dudas no contempladas.
+**Izq**: H2 + nota con link a WhatsApp para dudas no contempladas.
 
 **Der — acordeón**: cada item tiene border top 1px line (y el último border-bottom), padding 20 0.
 
@@ -291,7 +309,7 @@ Temas cubiertos: mínimo de unidades, plazos, cobertura geográfica, diferencias
 
 Padding `clamp(64px, 8vw, 120px) 0`. Grid `1.4fr 0.6fr`, gap 48, align end.
 
-**Izq**: eyebrow gold + H2 con palabra clave en `.gold` + subtítulo 17px opacity 0.85 max-width 50ch.
+**Izq**: H2 en crema ("Empezar un pedido"), un solo color + subtítulo 17px opacity 0.85 max-width 50ch.
 
 **Der — stack vertical**:
 
@@ -310,7 +328,7 @@ Fondo `navy-deep`, padding `80 0 32`.
 **Top** (grid `1.4fr 1fr 1fr 1fr`, gap 48, border-bottom 1px rgba(cream,0.14), padding-bottom 56):
 
 1. **Brand**: logo icono 64 + nombre + párrafo resumen de propuesta de valor.
-2. **Servicios** (h4 gold UPPER 13px ls 0.12em): lista de servicios principales.
+2. **Servicios** (h3 gold, Inter Tight 15px weight 600, sentence case): lista de servicios principales.
 3. **Sectores**: lista de sectores cubiertos.
 4. **Contacto**: dirección, teléfono, email, link a blog externo. Debajo: 3 iconos de redes circulares 36×36 (IG, FB, WhatsApp).
 
