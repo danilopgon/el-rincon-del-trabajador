@@ -4,6 +4,7 @@ import { CONTACT } from "../lib/contact";
 const NAV_LINKS = [
   { href: "#servicios", label: "Servicios" },
   { href: "#sectores", label: "Sectores" },
+  { href: "#proveedores", label: "Proveedores" },
   { href: "#tienda", label: "Tienda" },
   { href: CONTACT.blog, label: "Blog ↗", external: true },
   { href: "#contacto", label: "Contacto" },
