@@ -6,3 +6,6 @@ test-results
 .astro
 .claude
 pnpm-lock.yaml
+
+# Hallmark run artefacts
+.hallmark/

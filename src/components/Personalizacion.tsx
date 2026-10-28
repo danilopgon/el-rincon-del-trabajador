@@ -46,7 +46,6 @@ export default function Personalizacion() {
       <div className="wrap">
         <div className="pers__layout">
           <div className="pers__copy">
-            <span className="eyebrow">Personalización</span>
             <h2>
               Tu logo,
               <br />
@@ -102,6 +101,7 @@ export default function Personalizacion() {
                   }}
                 >
                   <svg
+                    aria-hidden="true"
                     width="28"
                     height="28"
                     viewBox="0 0 24 24"

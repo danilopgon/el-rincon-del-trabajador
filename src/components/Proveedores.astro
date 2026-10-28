@@ -1,0 +1,85 @@
+---
+import Icon from "./icons/Icon.astro";
+
+const brands = [
+  {
+    name: "Delta Plus",
+    what: "EPI de la cabeza a los pies",
+    href: "https://publication.deltaplus.eu/TheSafetyBook-ES/",
+  },
+  {
+    name: "DIAN",
+    what: "Calzado profesional (División Anatómicos)",
+    href: "https://www.dian.es/catalogo",
+  },
+  {
+    name: "Feliz Caminar",
+    what: "Zuecos y calzado sanitario y de hostelería",
+    href: "https://felizcaminar.com/wp-content/uploads/2026/09/CatalogoFelizCaminar2026.pdf",
+    pdf: true,
+  },
+  {
+    name: "JHK",
+    what: "Camisetas, polos y sudaderas para personalizar",
+    href: "https://www.jhktshirt.com/es/catalogo",
+  },
+  {
+    name: "Juba",
+    what: "Guantes y ropa de trabajo",
+    href: "https://www.jubappe.com/descargas",
+  },
+  {
+    name: "Textil-R",
+    what: "Vestuario de hostelería, sanidad y seguridad",
+    href: "https://www.textil-r.com/es/",
+  },
+  {
+    name: "Tomás Bodero",
+    what: "Ropa y equipos de protección laboral",
+    href: "https://tbgroupsafety.com/es/catalogos/",
+  },
+  {
+    name: "U-Power",
+    what: "Calzado de seguridad y vestuario",
+    href: "https://u-power.ai/es-es",
+  },
+  {
+    name: "Uniformes Garys",
+    what: "Uniformes de hostelería, sanidad y belleza",
+    href: "https://uniformesgarys.com/pages/catalogos",
+  },
+  {
+    name: "Velilla",
+    what: "Vestuario laboral y calzado de seguridad",
+    href: "https://www.velilla-group.com/es/catalogos",
+  },
+];
+---
+
+<section id="proveedores" class="section">
+  <div class="wrap">
+    <div class="svc__head" data-reveal>
+      <h2>Las marcas<br />que trabajamos</h2>
+      <p class="lead">
+        Mira el catálogo de cada marca y pregúntanos por la referencia que te interese.
+      </p>
+    </div>
+    <ul class="prov__list" data-reveal>
+      {
+        brands.map((b) => (
+          <li class="prov__item">
+            <div>
+              <h3 class="prov__name">{b.name}</h3>
+              <p class="prov__what">{b.what}</p>
+            </div>
+            <a class="prov__link" href={b.href} target="_blank" rel="noopener noreferrer">
+              {b.pdf ? "Catálogo en PDF" : "Ver catálogo"}
+              <Icon name="arrowUR" width="18" height="18" class="icon" />
+              <span class="sr-only"> de {b.name} (abre en nueva pestaña)</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

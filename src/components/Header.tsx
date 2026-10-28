@@ -4,6 +4,7 @@ import { CONTACT } from "../lib/contact";
 const NAV_LINKS = [
   { href: "#servicios", label: "Servicios" },
   { href: "#sectores", label: "Sectores" },
+  { href: "#proveedores", label: "Proveedores" },
   { href: "#tienda", label: "Tienda" },
   { href: CONTACT.blog, label: "Blog ↗", external: true },
   { href: "#contacto", label: "Contacto" },
@@ -69,7 +70,7 @@ export default function Header() {
             <img src="/logo-marca.png" alt="El Rincón del Trabajador" width={37} height={52} />
             <div className="hdr__logo-text">
               <strong>El Rincón</strong>
-              <span>del Trabajador</span>
+              <span className="hdr__wordmark-sub">del Trabajador</span>
             </div>
           </a>
 
@@ -152,7 +153,7 @@ export default function Header() {
             <img src="/logo-marca.png" alt="El Rincón del Trabajador" width={30} height={42} />
             <div className="hdr__logo-text">
               <strong>El Rincón</strong>
-              <span>del Trabajador</span>
+              <span className="hdr__wordmark-sub">del Trabajador</span>
             </div>
           </a>
           <button

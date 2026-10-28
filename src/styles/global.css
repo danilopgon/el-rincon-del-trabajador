@@ -1,3 +1,15 @@
+/* Hallmark · checked: 2026-10-28 · genre: editorial (inferred)
+ * floor: 0 FAIL · fixed: 19 (11, 18, 19, 26a, 33, 34, 38i, 38iii, 39b, 40, 44b, 44d, 48, 54, 55a, 62, 63, 67, 72) · structural: 3 printed (24b, 44c, 58)
+ * built: the project · redesign: polish · v2.0.0 */
+/* Hallmark · dropped #personalizacion · the Personalización section is commented out in index.astro, so the two footer links now point at the Bordado y DTF card in #servicios */
+/* Hallmark · reworded "Nuestra experiencia a tu servicio." to "Quiénes somos" · 54 named the eyebrow, its plain label becomes the heading */
+/* Hallmark · reworded "¿Listo para vestir a tu equipo?" to "Empezar un pedido" · 54 named the eyebrow, its plain label becomes the heading */
+/* Hallmark · dismissed 28a · the first Servicios photo sits below the fold at every width; the hero escaparate is the LCP and already eager with high priority */
+/* Hallmark · dismissed 49 · every flagged label is a .btn with white-space: nowrap; the long tail is sr-only text for new-tab links */
+/* Hallmark · dismissed 25 · the map placeholder description is a one-sentence caption, allowed from 28ch */
+/* Hallmark · answered F15 · column gaps 24, 48 and 64 are the DESIGN.md grid spec per section; unifying them is layout work beyond a polish */
+/* Hallmark · waive 49b · the address administracion@elrincondeltrabajador.com cannot shorten and breaks to two lines only at 320px · es el correo real de la tienda, que no se puede acortar */
+/* Hallmark · answered F19 · DESIGN.md sets Saira 700 and 800 for display and Inter Tight 400 to 600 for body; the brand system owns the weights */
 @import "@fontsource/saira-condensed/700.css";
 @import "@fontsource/saira-condensed/800.css";
 @import "@fontsource-variable/inter-tight/wght.css";
@@ -32,11 +44,11 @@
 }
 
 /* ===== Scroll-reveal initial states ===== */
-[data-reveal] {
+.js [data-reveal] {
   opacity: 0;
   transform: translateY(24px);
 }
-[data-reveal-stagger] > * {
+.js [data-reveal-stagger] > * {
   opacity: 0;
   transform: translateY(32px);
 }
@@ -44,6 +56,10 @@
 /* ===== Base reset ===== */
 * {
   box-sizing: border-box;
+}
+html,
+body {
+  overflow-x: clip;
 }
 img {
   display: block;
@@ -93,8 +109,8 @@ button {
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 16px 24px;
+  gap: 8px;
+  padding: 12px 24px;
   border-radius: 999px;
   font-weight: 600;
   font-size: 15px;
@@ -109,6 +125,15 @@ button {
 }
 .btn:hover {
   transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(0);
+}
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
 }
 .btn--primary {
   background: var(--c-navy);
@@ -131,11 +156,18 @@ button {
   border-color: var(--c-line);
 }
 .btn--ghost:hover {
-  background: rgba(36, 48, 63, 0.06);
+  background: var(--c-wash);
+}
+.btn--on-dark {
+  color: var(--c-cream);
+  border-color: var(--c-cream-ghost);
+}
+.btn--on-dark:hover {
+  background: var(--c-cream-line);
 }
 
 .btn--lg {
-  padding: 20px 32px;
+  padding: 12px 28px;
   font-size: 16px;
 }
 .icon {
@@ -186,7 +218,7 @@ button {
   color: var(--c-navy);
   text-transform: uppercase;
 }
-.hdr__logo-text span {
+.hdr__wordmark-sub {
   font-family: var(--f-display);
   font-weight: 600;
   font-size: 12px;
@@ -241,7 +273,7 @@ button {
 }
 .hero__container {
   position: relative;
-  padding-top: 56px;
+  padding-top: 0;
   padding-bottom: 80px;
 }
 
@@ -254,30 +286,12 @@ button {
   position: relative;
 }
 .heroA__title {
-  font-size: clamp(64px, 9.5vw, 136px);
-  line-height: 0.86;
+  font-size: clamp(56px, 7.4vw, 112px);
+  line-height: 1;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: -0.02em;
   color: var(--c-navy);
-}
-.heroA__title em {
-  font-style: normal;
-  color: var(--c-gold);
-  display: inline-block;
-  position: relative;
-}
-.heroA__title em::after {
-  content: "";
-  position: absolute;
-  left: -4%;
-  right: -4%;
-  bottom: 8%;
-  height: 14%;
-  background: currentColor;
-  opacity: 0.18;
-  z-index: -1;
-  border-radius: 4px;
 }
 .heroA__sub {
   margin-top: 28px;
@@ -311,11 +325,9 @@ button {
   line-height: 1;
 }
 .heroA__meta-item span {
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 14px;
   color: var(--c-muted);
-  margin-top: 6px;
+  margin-top: 4px;
 }
 .heroA__media {
   position: relative;
@@ -329,30 +341,6 @@ button {
   height: 100%;
   object-fit: cover;
 }
-.heroA__sticker {
-  position: absolute;
-  bottom: 24px;
-  left: 24px;
-  background: var(--c-gold);
-  color: var(--c-navy);
-  padding: 12px 16px 14px;
-  border-radius: 12px;
-  font-family: var(--f-display);
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  line-height: 1.05;
-  max-width: 200px;
-  box-shadow: 0 16px 28px -16px rgba(0, 0, 0, 0.35);
-}
-.heroA__sticker strong {
-  display: block;
-  font-size: 24px;
-  letter-spacing: 0;
-  margin-bottom: 4px;
-}
-
 /* ========== Decorative needle ========== */
 .needle-svg {
   color: var(--c-navy);
@@ -393,6 +381,9 @@ button {
   height: 6px;
   border-radius: 50%;
   background: var(--c-gold);
+}
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
 }
 @keyframes marq {
   from {
@@ -448,17 +439,6 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 500ms ease;
-}
-.svc__card:hover .svc__card-img img {
-  transform: scale(1.05);
-}
-.svc__card-num {
-  font-family: var(--f-display);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: var(--c-gold-deep);
 }
 .svc__card h3 {
   font-size: 24px;
@@ -525,7 +505,7 @@ button {
   color: var(--c-gold);
 }
 .sect__cell:hover .sect__cell-meta {
-  color: rgba(247, 239, 217, 0.7);
+  color: var(--c-cream-soft);
 }
 .sect__cell-icon {
   width: 36px;
@@ -541,11 +521,9 @@ button {
   margin-top: auto;
 }
 .sect__cell-meta {
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 14px;
   color: var(--c-muted);
-  font-weight: 600;
+  font-weight: 500;
 }
 .sect__cell-arrow {
   position: absolute;
@@ -554,6 +532,59 @@ button {
   color: var(--c-navy);
   opacity: 0.4;
   transition: color 200ms;
+}
+
+/* ========== Proveedores ========== */
+.prov__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 64px;
+  border-top: 1px solid var(--c-line);
+}
+.prov__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--c-line);
+}
+.prov__name {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--c-navy);
+}
+.prov__what {
+  margin: 4px 0 0;
+  font-size: 15px;
+  color: var(--c-muted);
+}
+.prov__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--c-navy);
+  white-space: nowrap;
+  text-decoration: underline;
+  text-decoration-color: var(--c-gold);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: color 160ms ease;
+}
+.prov__link:hover {
+  color: var(--c-gold-deep);
+}
+.prov__link:active {
+  color: var(--c-navy-deep);
 }
 
 /* ========== Personalización (galería) ========== */
@@ -604,11 +635,9 @@ button {
   color: var(--c-navy);
 }
 .pers__stats div span {
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 14px;
   color: var(--c-muted);
-  font-weight: 600;
+  font-weight: 500;
 }
 .pers__gallery {
   display: grid;
@@ -635,10 +664,8 @@ button {
   left: 12px;
   background: var(--c-navy);
   color: var(--c-cream);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 6px 10px;
+  font-size: 13px;
+  padding: 4px 8px;
   font-weight: 600;
 }
 
@@ -666,19 +693,19 @@ button {
   right: 20px;
   background: var(--c-gold);
   color: var(--c-navy);
-  padding: 14px 16px;
-  font-family: var(--f-display);
-  font-weight: 800;
-  text-transform: uppercase;
-  font-size: 13px;
-  letter-spacing: 0.08em;
+  padding: 20px 16px 12px;
+  font-weight: 600;
+  font-size: 14px;
   text-align: center;
-  line-height: 1.05;
+  line-height: 1.2;
 }
 .about__badge strong {
   display: block;
+  font-family: var(--f-display);
+  font-weight: 800;
   font-size: 36px;
-  letter-spacing: 0;
+  line-height: 1.1;
+  margin-bottom: 4px;
 }
 .about__copy h2 {
   margin-bottom: 24px;
@@ -717,11 +744,8 @@ button {
   line-height: 1;
 }
 .about__sign-role {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--c-muted);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  font-weight: 600;
   margin-top: 4px;
 }
 
@@ -744,7 +768,7 @@ button {
   height: 100%;
 }
 .shop__info {
-  background: var(--c-cream);
+  background: var(--c-paper);
   border: 1px solid var(--c-line);
   padding: 40px;
   display: flex;
@@ -765,11 +789,13 @@ button {
   flex: 0 0 36px;
   border-radius: 4px;
 }
+.shop__row-body {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
 .shop__row-body strong {
   display: block;
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 14px;
   color: var(--c-muted);
   margin-bottom: 4px;
   font-weight: 600;
@@ -865,14 +891,11 @@ button {
 }
 .cta-banner__title {
   font-size: clamp(48px, 6vw, 96px);
-  line-height: 0.9;
+  line-height: 1;
   font-weight: 800;
   text-transform: uppercase;
   color: var(--c-cream);
   margin: 0;
-}
-.cta-banner__title .gold {
-  color: var(--c-gold);
 }
 .cta-banner__sub {
   font-size: 17px;
@@ -907,7 +930,7 @@ button {
   grid-template-columns: 1.4fr 1fr 1fr 1fr;
   gap: 48px;
   padding-bottom: 56px;
-  border-bottom: 1px solid rgba(247, 239, 217, 0.14);
+  border-bottom: 1px solid var(--c-cream-line);
 }
 .ftr__brand-text {
   margin-top: 20px;
@@ -918,11 +941,12 @@ button {
 }
 .ftr h3,
 .ftr h4 {
-  font-family: var(--f-display);
-  text-transform: uppercase;
-  font-size: 13px;
-  letter-spacing: 0.12em;
-  margin: 0 0 18px;
+  font-family: var(--f-body);
+  text-transform: none;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  margin: 0 0 16px;
   color: var(--c-gold);
 }
 .ftr ul {
@@ -958,7 +982,7 @@ button {
 .ftr__social a {
   width: 36px;
   height: 36px;
-  border: 1px solid rgba(247, 239, 217, 0.25);
+  border: 1px solid var(--c-cream-edge);
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -972,7 +996,7 @@ button {
 .ftr__social-placeholder {
   width: 36px;
   height: 36px;
-  border: 1px solid rgba(247, 239, 217, 0.25);
+  border: 1px solid var(--c-cream-edge);
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -1005,12 +1029,12 @@ button {
   align-items: center;
   gap: 10px;
   padding: 14px 18px 14px 14px;
-  background: #25d366;
-  color: #0a2e1e;
+  background: var(--c-whatsapp);
+  color: var(--c-whatsapp-ink);
   border-radius: 999px;
   font-weight: 700;
   font-size: 14px;
-  box-shadow: 0 16px 32px -10px rgba(37, 211, 102, 0.55);
+  box-shadow: var(--shadow-fab);
   transition: transform 200ms ease;
 }
 .wa-fab:hover {
@@ -1039,7 +1063,7 @@ button {
   flex-shrink: 0;
 }
 .hdr__burger:hover {
-  background: rgba(36, 48, 63, 0.07);
+  background: var(--c-wash);
 }
 .hdr__burger-line {
   display: block;
@@ -1067,7 +1091,7 @@ button {
 .nav-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(24, 31, 42, 0.52);
+  background: var(--c-scrim);
   backdrop-filter: blur(2px);
   z-index: 55;
   opacity: 0;
@@ -1097,7 +1121,7 @@ button {
     transform 300ms cubic-bezier(0.32, 0, 0.15, 1),
     visibility 0s linear 300ms;
   overflow-y: auto;
-  box-shadow: -8px 0 48px rgba(24, 31, 42, 0.16);
+  box-shadow: -8px 0 48px var(--c-shade);
 }
 .nav-drawer.is-open {
   transform: translateX(0);
@@ -1129,7 +1153,7 @@ button {
   transition: background 160ms ease;
 }
 .nav-drawer__close:hover {
-  background: rgba(36, 48, 63, 0.07);
+  background: var(--c-wash);
 }
 
 .nav-drawer__links {
@@ -1225,7 +1249,7 @@ button {
   .faq__layout,
   .cta-banner__inner,
   .ftr__top {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 32px;
   }
   .sect__grid {
@@ -1250,6 +1274,9 @@ button {
   .svc__grid {
     grid-template-columns: 1fr;
   }
+  .prov__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
   .svc__head {
     flex-direction: column;
     align-items: start;
@@ -1262,9 +1289,8 @@ button {
   }
 }
 
-/* GSAP reveal — elements start hidden until ScrollTrigger fires */
-[data-reveal] {
-  opacity: 0;
+/* GSAP reveal: hidden only under .js, so the page reads with scripting off */
+.js [data-reveal] {
   will-change: transform, opacity;
 }
 
@@ -1357,10 +1383,8 @@ button {
   color: var(--color-cream);
   padding: 10px 14px;
   text-align: left;
-  font-family: var(--font-display);
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-size: 14px;
+  font-weight: 600;
 }
 .legal td {
   padding: 10px 14px;
@@ -1369,7 +1393,7 @@ button {
   color: var(--color-ink);
 }
 .legal tr:nth-child(even) td {
-  background: rgba(0, 0, 0, 0.03);
+  background: var(--c-zebra);
 }
 .legal__prefs {
   background: var(--color-cream);
@@ -1405,7 +1429,7 @@ button {
   align-items: center;
   gap: 24px;
   flex-wrap: wrap;
-  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 -4px 24px var(--c-shade);
 }
 .cookie-banner__text {
   flex: 1 1 260px;
@@ -1432,7 +1456,7 @@ button {
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 600;
-  padding: 8px 18px;
+  padding: 12px 16px;
   transition: opacity 0.15s;
 }
 .cookie-banner__btn:hover {
@@ -1445,7 +1469,7 @@ button {
 .cookie-banner__btn--ghost {
   background: transparent;
   color: var(--color-cream);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid var(--c-cream-edge);
 }
 
 /* ─── Map placeholder ───────────────────────────────────────────────────────── */
@@ -1516,8 +1540,9 @@ button {
 }
 .skip-link {
   position: absolute;
-  left: -9999px;
+  left: 16px;
   top: 8px;
+  transform: translateY(-200%);
   z-index: 9999;
   padding: 12px 20px;
   background: var(--c-navy);
@@ -1529,8 +1554,8 @@ button {
   white-space: nowrap;
 }
 .skip-link:focus-visible {
-  left: 16px;
-  outline: 2px solid var(--c-gold);
+  transform: none;
+  outline: 2px solid var(--c-navy);
   outline-offset: 3px;
 }
 

@@ -8,7 +8,7 @@ test.describe("Header navigation", () => {
 
   test("desktop nav shows all main links", async ({ page }) => {
     const nav = page.locator(".hdr__nav");
-    for (const label of ["Servicios", "Sectores", "Tienda", "Contacto"]) {
+    for (const label of ["Servicios", "Sectores", "Proveedores", "Tienda", "Contacto"]) {
       await expect(nav.getByRole("link", { name: label })).toBeAttached();
     }
   });
