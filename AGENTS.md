@@ -84,6 +84,9 @@ Use [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:
 Push to `main` — GitHub Actions runs quality gate, E2E tests, and deploys automatically via SSH.
 See `.github/workflows/deploy.yml` for details.
 
+- The deploy uploads `dist/` to a staging folder and runs `scripts/publish-remote.sh` on the server: `rsync --checksum --delete` into the docroot, **keeping previous `/_astro/` assets** (pruned after 30 days only when the new build no longer uses them). SiteGround's page cache can serve older HTML for ~12 h, and that HTML must still find its hashed CSS/JS. Tested in `src/test/publish-remote.test.ts`.
+- The last step tries to purge SiteGround's dynamic cache (best effort, never fails the deploy; the log prints the HTTP status). If it does not work, flush it from Site Tools when a change must be visible right away.
+
 ## Blog (WordPress headless)
 
 The blog lives at `/blog/` and is generated at build time from the public WordPress REST API of `blog.elrincondeltrabajador.com` (`src/lib/blog.ts`). WordPress is only the CMS: wp-admin, REST, the MCP server and media.
