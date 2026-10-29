@@ -230,6 +230,15 @@ Head con H2 ("Las marcas que trabajamos") + lead.
 
 Sin logos de marca (no tenemos permiso de uso). Los enlaces y la descripción de cada marca viven en `src/components/Proveedores.astro`.
 
+## 7c. Blog (`/blog/` y `/blog/<slug>/`)
+
+Contenido de WordPress (headless) pintado con este sistema. Sin JS en cliente.
+
+- **Listado:** H1 "Blog" + lead en el patrón `.svc__head`; rejilla `repeat(auto-fill, minmax(min(100%, 320px), 1fr))` de tarjetas `BlogCard` (fondo paper, borde `--c-line`, imagen 4:3 si existe, categoría en gold-deep + fecha en muted a 14px, título Saira 26px, extracto 15px muted). Hover: solo borde dorado; la imagen no se mueve.
+- **Entrada:** meta (categoría + fecha), H1 a `clamp(40px, 4.8vw, 72px)`, extracto como lead, imagen destacada 16:9 con `--d-radius`, cuerpo `.post-body` y después el `CTABanner`.
+- **`.post-body`:** medida 68ch, texto 18px/1.65; h2 `clamp(30px, 3vw, 44px)` con 56px encima; enlaces con subrayado dorado de 2px; tablas con cabecera en Inter Tight 600 sobre paper y filas separadas por hairline; `figcaption` 14px muted centrado; el índice de Rank Math (`#rank-math-toc`) en caja paper con la etiqueta "Contenido" en sentence case.
+- Solo bloques nativos sencillos de Gutenberg (párrafo, título, lista, tabla, imagen, índice). Otros bloques necesitan estilos en `.post-body` antes de usarlos.
+
 ## 8. Personalización (`#personalizacion`)
 
 Grid `0.95fr 1.05fr`, gap 64.

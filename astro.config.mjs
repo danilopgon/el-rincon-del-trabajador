@@ -5,6 +5,7 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://elrincondeltrabajador.com",
+  image: { domains: ["blog.elrincondeltrabajador.com"] },
   integrations: [
     react(),
     sitemap({

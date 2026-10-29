@@ -2,12 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import { CONTACT } from "../lib/contact";
 
 const NAV_LINKS = [
-  { href: "#servicios", label: "Servicios" },
-  { href: "#sectores", label: "Sectores" },
-  { href: "#proveedores", label: "Proveedores" },
-  { href: "#tienda", label: "Tienda" },
-  { href: CONTACT.blog, label: "Blog ↗", external: true },
-  { href: "#contacto", label: "Contacto" },
+  { href: "/#servicios", label: "Servicios" },
+  { href: "/#sectores", label: "Sectores" },
+  { href: "/#proveedores", label: "Proveedores" },
+  { href: "/#tienda", label: "Tienda" },
+  { href: CONTACT.blog, label: "Blog" },
+  { href: "/#contacto", label: "Contacto" },
 ];
 
 export default function Header() {
@@ -75,14 +75,9 @@ export default function Header() {
           </a>
 
           <nav className="hdr__nav">
-            {NAV_LINKS.map(({ href, label, external }) => (
-              <a
-                key={href}
-                href={href}
-                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              >
+            {NAV_LINKS.map(({ href, label }) => (
+              <a key={href} href={href}>
                 {label}
-                {external ? <span className="sr-only"> (abre en nueva pestaña)</span> : null}
               </a>
             ))}
           </nav>
@@ -179,15 +174,10 @@ export default function Header() {
         </div>
 
         <ul className="nav-drawer__links">
-          {NAV_LINKS.map(({ href, label, external }) => (
+          {NAV_LINKS.map(({ href, label }) => (
             <li key={href}>
-              <a
-                href={href}
-                onClick={close}
-                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              >
+              <a href={href} onClick={close}>
                 {label}
-                {external ? <span className="sr-only"> (abre en nueva pestaña)</span> : null}
               </a>
             </li>
           ))}

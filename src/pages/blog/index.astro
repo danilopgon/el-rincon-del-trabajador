@@ -1,0 +1,52 @@
+---
+import BlogCard from "../../components/BlogCard.astro";
+import CTABanner from "../../components/CTABanner.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header";
+import WhatsAppFab from "../../components/WhatsAppFab.astro";
+import Base from "../../layouts/Base.astro";
+import { getAllPosts } from "../../lib/blog";
+import { CONTACT } from "../../lib/contact";
+
+const posts = await getAllPosts();
+---
+
+<Base
+  title="Blog · El Rincón del Trabajador"
+  description="Guías de ropa de trabajo, calzado de seguridad y EPI explicadas sin tecnicismos desde nuestra tienda de vestuario laboral en Tarancón (Cuenca)."
+>
+  <Header client:load />
+  <main id="main-content">
+    <section class="section blog">
+      <div class="wrap">
+        <div class="svc__head">
+          <h1 class="blog__title">Blog</h1>
+          <p class="lead">
+            Guías claras sobre ropa de trabajo, calzado y EPI, escritas desde la tienda de Tarancón.
+          </p>
+        </div>
+        {
+          posts.length > 0 ? (
+            <div class="blog__grid">
+              {posts.map((post) => (
+                <BlogCard post={post} />
+              ))}
+            </div>
+          ) : (
+            <p class="blog__empty">
+              Todavía no hay entradas. Mientras tanto,{" "}
+              <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer">
+                pregúntanos por WhatsApp
+                <span class="sr-only"> (abre en nueva pestaña)</span>
+              </a>
+              .
+            </p>
+          )
+        }
+      </div>
+    </section>
+    <CTABanner />
+  </main>
+  <Footer />
+  <WhatsAppFab />
+</Base>

@@ -11,5 +11,5 @@ export const CONTACT = {
     "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd4283606b532e25:0x2e04a234a632fede",
   hoursWeek: "Lunes a viernes: 9:00–14:00 y 16:00–19:00",
   hoursWeekend: "Sábados: cerrado (encargos por WhatsApp)",
-  blog: "https://blog.elrincondeltrabajador.com",
+  blog: "/blog/",
 } as const;

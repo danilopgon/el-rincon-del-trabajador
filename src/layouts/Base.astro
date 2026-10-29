@@ -10,13 +10,24 @@ interface Props {
   description?: string;
   noindex?: boolean;
   canonical?: string;
+  image?: { src: string; alt: string; width: number; height: number };
+  ogType?: "website" | "article";
 }
 
 const {
   title = "Vestuario laboral y EPI en Tarancón · El Rincón del Trabajador",
   description = "Ropa de trabajo, EPI certificado y bordado/DTF desde una unidad. Asesoramiento en tienda y por WhatsApp, en Tarancón (Cuenca) con 15 años de oficio en el sector.",
   noindex = false,
+  image,
+  ogType = "website",
 } = Astro.props;
+
+const ogImage = image ?? {
+  src: new URL("/og-image.png", Astro.site).toString(),
+  alt: "El Rincón del Trabajador — Vestuario laboral y EPI en Tarancón",
+  width: 1200,
+  height: 630,
+};
 
 const canonical = Astro.props.canonical ?? new URL(Astro.url.pathname, Astro.site).toString();
 
@@ -76,23 +87,20 @@ const schema = {
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:site_name" content="El Rincón del Trabajador" />
     {
       /* og:image spec: 1200×630 PNG at public/og-image.png — max 300 KB — regenerate: pnpm generate:og */
     }
-    <meta property="og:image" content={new URL("/og-image.png", Astro.site).toString()} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta
-      property="og:image:alt"
-      content="El Rincón del Trabajador — Vestuario laboral y EPI en Tarancón"
-    />
+    <meta property="og:image" content={ogImage.src} />
+    <meta property="og:image:width" content={String(ogImage.width)} />
+    <meta property="og:image:height" content={String(ogImage.height)} />
+    <meta property="og:image:alt" content={ogImage.alt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL("/og-image.png", Astro.site).toString()} />
+    <meta name="twitter:image" content={ogImage.src} />
     <meta name="theme-color" content="#24303f" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -104,6 +112,7 @@ const schema = {
       }
     </script>
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <slot name="head" />
     <noscript
       ><style>
         [data-reveal],
