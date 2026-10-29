@@ -57,6 +57,8 @@ jobs:
           name: site-dist
           path: dist
           if-no-files-found: error
+          # dist/.htaccess carries the security and cache headers; hidden files are left out by default.
+          include-hidden-files: true
 
       - name: Upload Playwright report on failure
         if: failure()
@@ -84,6 +86,9 @@ jobs:
         with:
           name: site-dist
           path: dist
+
+      - name: Check build includes .htaccess
+        run: test -f dist/.htaccess
 
       - name: Configure SSH
         env:

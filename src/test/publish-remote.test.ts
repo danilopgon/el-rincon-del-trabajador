@@ -105,3 +105,22 @@ describe("publish-remote.sh", () => {
     expect(read(HOME)).toBe("old home");
   });
 });
+
+describe("deploy workflow", () => {
+  const workflow = readFileSync(join(cwd(), ".github/workflows/deploy.yml"), "utf8");
+
+  it("keeps .htaccess in the build artifact (upload-artifact drops hidden files by default)", () => {
+    const upload = workflow.slice(
+      workflow.indexOf("name: site-dist"),
+      workflow.indexOf("- name: Upload Playwright report")
+    );
+
+    expect(upload).toMatch(/include-hidden-files: true/);
+  });
+
+  it("refuses to deploy a build without .htaccess", () => {
+    const deployJob = workflow.slice(workflow.indexOf("Download build artifact"));
+
+    expect(deployJob).toMatch(/test -f dist\/\.htaccess/);
+  });
+});
