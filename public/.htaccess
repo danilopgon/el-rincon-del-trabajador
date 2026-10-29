@@ -18,9 +18,10 @@
     Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=()"
 
     # Content Security Policy
+    # Las imágenes del cuerpo de las entradas del blog se sirven desde el WordPress (blog.), por eso está permitido en las imágenes.
     # 'unsafe-inline' es necesario para los scripts inline de Astro SSG (JSON-LD,
     # hidratación de islands). En SSR se podría sustituir por nonces.
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src https://www.google.com/maps/; frame-ancestors 'none'; font-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://blog.elrincondeltrabajador.com; frame-src https://www.google.com/maps/; frame-ancestors 'none'; font-src 'self'; connect-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'"
 </IfModule>
 
 # ─── Cache — assets con hash de contenido (Vite) ─────────────────────────────
