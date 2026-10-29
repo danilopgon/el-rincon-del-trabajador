@@ -91,6 +91,6 @@ The blog lives at `/blog/` and is generated at build time from the public WordPr
 - **Build fails on purpose if the API is unreachable** or returns an error, so a deploy never ships without the blog. Zero posts is fine.
 - **SEO** (title, meta description) comes from Rank Math's headless endpoint (`rankmath/v1/getHead`); if it is off or fails, the post title and excerpt are used.
 - **Drafts never reach the site.** Only published posts are fetched.
-- **SiteGround caches REST responses.** Every build request carries a fresh `_ts` query value so it bypasses that cache; never remove it, or a deploy right after publishing can ship a stale post list.
+- **SiteGround caches REST responses.** Every build request first asks for a fresh copy (`_ts` query value). From CI runners that uncached request can get SiteGround's anti-bot page instead of JSON; then the build falls back to the cached URL (SiteGround purges it when a post is saved) and logs a warning.
 - **After publishing or editing a post**, the static site must be rebuilt: run `gh workflow run deploy.yml --ref main`, wait for it to succeed and check `https://elrincondeltrabajador.com/blog/<slug>/`.
 - Old `blog.` URLs are redirected to `/blog/` by an `.htaccess` block on the WordPress host (not in this repo).

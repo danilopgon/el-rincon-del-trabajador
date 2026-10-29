@@ -128,16 +128,31 @@ const SEO_DESCRIPTION_MAX = 155;
 // build read what WordPress has now (a post published a minute ago, an edited Rank Math title).
 const cacheBust = () => `_ts=${Date.now()}`;
 
+const isJson = (response: Response) =>
+  (response.headers.get("Content-Type") ?? "").includes("json");
+
+// An uncached request from a datacenter IP (CI runners) can get SiteGround's anti-bot
+// challenge page instead of JSON. The cached copy skips that check, and SiteGround purges
+// it when a post is saved, so it is the next best answer.
+async function fetchFresh(url: string, fetchImpl: FetchLike): Promise<Response> {
+  const fresh = await fetchImpl(`${url}&${cacheBust()}`);
+  if (!fresh.ok || isJson(fresh)) return fresh;
+  console.warn(
+    `${url} devolvió una página en vez de JSON (reto anti-bots); uso la copia en caché.`
+  );
+  return fetchImpl(url);
+}
+
 const defaultFetch: FetchLike = (url) => globalThis.fetch(url);
 
 export async function fetchPosts(fetchImpl: FetchLike = defaultFetch): Promise<BlogPost[]> {
   const posts: BlogPost[] = [];
   let totalPages = 1;
   for (let page = 1; page <= totalPages; page++) {
-    const url = `${POSTS_URL}&page=${page}&${cacheBust()}`;
+    const url = `${POSTS_URL}&page=${page}`;
     let response: Response;
     try {
-      response = await fetchImpl(url);
+      response = await fetchFresh(url, fetchImpl);
     } catch (error) {
       throw new Error(`No se pudo cargar el blog desde ${url}: ${String(error)}`, {
         cause: error,
@@ -145,6 +160,9 @@ export async function fetchPosts(fetchImpl: FetchLike = defaultFetch): Promise<B
     }
     if (!response.ok) {
       throw new Error(`No se pudo cargar el blog desde ${url}: HTTP ${response.status}`);
+    }
+    if (!isJson(response)) {
+      throw new Error(`No se pudo cargar el blog desde ${url}: la respuesta no devolvió JSON`);
     }
     totalPages = Number(response.headers.get("X-WP-TotalPages") ?? "1");
     const raw = (await response.json()) as WpPost[];
@@ -167,9 +185,9 @@ export async function getSeo(
   fetchImpl: FetchLike = defaultFetch
 ): Promise<BlogSeo> {
   const fallback = { title: post.title, description: truncate(post.excerpt, SEO_DESCRIPTION_MAX) };
-  const url = `${BLOG_ORIGIN}/wp-json/rankmath/v1/getHead?url=${encodeURIComponent(post.sourceUrl)}&${cacheBust()}`;
+  const url = `${BLOG_ORIGIN}/wp-json/rankmath/v1/getHead?url=${encodeURIComponent(post.sourceUrl)}`;
   try {
-    const response = await fetchImpl(url);
+    const response = await fetchFresh(url, fetchImpl);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const { head = "" } = (await response.json()) as { head?: string };
     const seo = parseRankMathHead(head);

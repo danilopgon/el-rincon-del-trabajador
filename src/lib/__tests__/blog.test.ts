@@ -134,13 +134,23 @@ describe("formatDate", () => {
 });
 
 function fakeFetch(
-  routes: (url: string) => { body: unknown; status?: number; headers?: Record<string, string> }
+  routes: (url: string) => {
+    body?: unknown;
+    html?: string;
+    status?: number;
+    headers?: Record<string, string>;
+  }
 ): FetchLike & { calls: string[] } {
   const calls: string[] = [];
   const fn = async (url: string) => {
     calls.push(url);
-    const { body, status = 200, headers = {} } = routes(url);
-    return new Response(JSON.stringify(body), { status, headers });
+    const { body, html, status = 200, headers = {} } = routes(url);
+    return html === undefined
+      ? new Response(JSON.stringify(body), {
+          status,
+          headers: { "Content-Type": "application/json; charset=UTF-8", ...headers },
+        })
+      : new Response(html, { status, headers: { "Content-Type": "text/html", ...headers } });
   };
   return Object.assign(fn, { calls });
 }
@@ -166,6 +176,25 @@ describe("fetchPosts", () => {
     await fetchPosts(fetchImpl);
 
     expect(fetchImpl.calls[0]).toMatch(/[?&]_ts=\d+/);
+  });
+
+  it("falls back to the cached URL when the fresh request gets a bot challenge", async () => {
+    const fetchImpl = fakeFetch((url) =>
+      url.includes("_ts=")
+        ? { html: "<html><head></head><body>challenge</body></html>", status: 202 }
+        : { body: [published], headers: { "X-WP-TotalPages": "1" } }
+    );
+
+    const posts = await fetchPosts(fetchImpl);
+
+    expect(posts.map((p) => p.slug)).toEqual([published.slug]);
+    expect(fetchImpl.calls.some((u) => !u.includes("_ts="))).toBe(true);
+  });
+
+  it("throws a clear error when even the cached URL is not JSON", async () => {
+    const fetchImpl = fakeFetch(() => ({ html: "<html>challenge</html>", status: 202 }));
+
+    await expect(fetchPosts(fetchImpl)).rejects.toThrow(/no devolvió JSON/);
   });
 
   it("returns empty list when there are no posts", async () => {
@@ -221,6 +250,16 @@ describe("getSeo", () => {
     await getSeo(post, fetchImpl);
 
     expect(fetchImpl.calls[0]).toMatch(/[?&]_ts=\d+/);
+  });
+
+  it("reads the cached Rank Math head when the fresh request gets a bot challenge", async () => {
+    const fetchImpl = fakeFetch((url) =>
+      url.includes("_ts=")
+        ? { html: "<html>challenge</html>", status: 202 }
+        : { body: { success: true, head: '<title>T</title><meta name="description" content="D">' } }
+    );
+
+    await expect(getSeo(post, fetchImpl)).resolves.toEqual({ title: "T", description: "D" });
   });
 
   it("falls back when Rank Math is off", async () => {
