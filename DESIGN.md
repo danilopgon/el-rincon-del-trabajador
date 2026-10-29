@@ -230,6 +230,15 @@ Head con H2 ("Las marcas que trabajamos") + lead.
 
 Sin logos de marca (no tenemos permiso de uso). Los enlaces y la descripción de cada marca viven en `src/components/Proveedores.astro`.
 
+## 7c. Blog (`/blog/` y `/blog/<slug>/`)
+
+Contenido de WordPress (headless) pintado con este sistema. Sin JS en cliente.
+
+- **Listado:** H1 "Guías de vestuario laboral" + lead en el patrón `.svc__head` ("Blog" solo en el menú). Rejilla adaptable solo con CSS: con 1–3 entradas la más reciente va como tarjeta ancha horizontal (con 2, las dos; con 3, las otras dos a mitades); desde 4 es un bento con la más reciente a 2×2 y la última fila estirada para no dejar huecos; en móvil, una columna. Tarjetas `BlogCard` (fondo paper, borde `--c-line`, imagen 4:3 si existe, categoría en gold-deep + fecha en muted a 14px, título Saira 26px, extracto 15px muted). Hover: solo borde dorado; la imagen no se mueve.
+- **Entrada:** una sola columna centrada (cabecera y cuerpo a 64ch con la misma base de 18px, imagen destacada a 900px, todo en ángulo recto). El artículo va sobre `paper` (fondo de lectura más claro; el header sigue en crema). Meta (categoría + fecha), H1 a `clamp(40px, 4.8vw, 72px)`, extracto manual como lead (el automático de WP no se muestra), imagen destacada 16:9, cuerpo `.post-body` y después el `CTABanner`.
+- **`.post-body`:** medida 64ch, texto 18px/1.7 con `letter-spacing: 0.01em` y tinta `--c-ink-soft` (#3A4250, 9,4:1 sobre paper) para que la prosa pese menos que los títulos en navy; párrafos separados 24px; h2 `clamp(30px, 3vw, 44px)` con 56px encima; enlaces con subrayado dorado de 2px; tablas con cabecera en Inter Tight 600 sobre crema y filas separadas por hairline; `figcaption` 14px muted centrado; el índice de Rank Math (`#rank-math-toc`) en caja crema con la etiqueta "Contenido" en sentence case.
+- Solo bloques nativos sencillos de Gutenberg (párrafo, título, lista, tabla, imagen, índice). Otros bloques necesitan estilos en `.post-body` antes de usarlos.
+
 ## 8. Personalización (`#personalizacion`)
 
 Grid `0.95fr 1.05fr`, gap 64.

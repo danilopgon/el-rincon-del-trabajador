@@ -1,0 +1,90 @@
+---
+import { Image } from "astro:assets";
+import CTABanner from "../../components/CTABanner.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header";
+import WhatsAppFab from "../../components/WhatsAppFab.astro";
+import Base from "../../layouts/Base.astro";
+import { formatDate, getAllPosts, getSeo, type BlogPost } from "../../lib/blog";
+import { serializeJsonLd } from "../../lib/jsonld";
+
+export async function getStaticPaths() {
+  const posts = await getAllPosts();
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+interface Props {
+  post: BlogPost;
+}
+
+const { post } = Astro.props;
+const seo = await getSeo(post);
+const canonical = new URL(`/blog/${post.slug}/`, Astro.site).toString();
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.title,
+  description: seo.description,
+  datePublished: post.date,
+  dateModified: post.modified,
+  ...(post.image ? { image: post.image.src } : {}),
+  author: {
+    "@type": "Organization",
+    name: "El Rincón del Trabajador",
+    url: "https://elrincondeltrabajador.com",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "El Rincón del Trabajador",
+    url: "https://elrincondeltrabajador.com",
+  },
+  mainEntityOfPage: canonical,
+};
+---
+
+<Base
+  title={seo.title}
+  description={seo.description}
+  canonical={canonical}
+  ogType="article"
+  image={post.image}
+>
+  <script is:inline slot="head" type="application/ld+json" set:html={serializeJsonLd(schema)} />
+  <Header client:load />
+  <main id="main-content">
+    <article class="section post">
+      <div class="wrap">
+        <header class="post__head">
+          <p class="post__meta">
+            {post.category && <span>{post.category.name}</span>}
+            <time datetime={post.date}>{formatDate(post.date)}</time>
+          </p>
+          <h1 class="post__title">{post.title}</h1>
+          {post.lead && <p class="lead post__lead">{post.lead}</p>}
+        </header>
+        {
+          post.image && (
+            <figure class="post__media">
+              <Image
+                src={post.image.src}
+                alt={post.image.alt}
+                width={post.image.width}
+                height={post.image.height}
+                widths={[400, 800, 1200]}
+                sizes="(max-width: 1100px) 100vw, 1040px"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+            </figure>
+          )
+        }
+        <div class="post-body" set:html={post.html} />
+      </div>
+    </article>
+    <CTABanner />
+  </main>
+  <Footer />
+  <WhatsAppFab />
+</Base>

@@ -31,6 +31,13 @@ describe("static accessibility safeguards", () => {
     expect(source).toContain('<a href="#main-content" class="skip-link">Saltar al contenido</a>');
   });
 
+  it("lets the CSP load blog post images from WordPress", () => {
+    const htaccess = readSource("public/.htaccess");
+    const imgSrc = /img-src ([^;]+);/.exec(htaccess)?.[1] ?? "";
+
+    expect(imgSrc.split(" ")).toContain("https://blog.elrincondeltrabajador.com");
+  });
+
   it("uses accessible contrast for brand gold and footer headings", () => {
     const tokens = readSource("src/styles/tokens.css");
     const global = readSource("src/styles/global.css");

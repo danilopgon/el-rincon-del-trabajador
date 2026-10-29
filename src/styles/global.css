@@ -587,6 +587,289 @@ button {
   color: var(--c-navy-deep);
 }
 
+/* ========== Blog ========== */
+.blog__title {
+  font-size: clamp(48px, 6vw, 96px);
+}
+.blog__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: var(--d-gap);
+}
+
+/* Adaptive listing: with 1 to 3 posts the newest is a wide card (two posts: both wide);
+   from 4 posts on it becomes a bento, the newest at 2x2 and the last row's leftovers stretched
+   so no card sits alone beside empty tracks. */
+.blog__grid > :first-child,
+.blog__grid:not(:has(> :nth-child(3))) > :nth-child(2) {
+  grid-column: 1 / -1;
+}
+.blog__grid:has(> :nth-child(3)):not(:has(> :nth-child(4))) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.blog__grid:has(> :nth-child(4)) {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.blog__grid:has(> :nth-child(4)) > :first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.blog__grid:has(> :nth-child(4)) > :last-child:nth-child(3n + 1) {
+  grid-column: 1 / -1;
+}
+.blog__grid:has(> :nth-child(4)) > :last-child:nth-child(3n + 2) {
+  grid-column: span 2;
+}
+@media (min-width: 801px) {
+  .blog__grid:not(:has(> :nth-child(4))) > :first-child .blog-card__link,
+  .blog__grid:not(:has(> :nth-child(3))) > :nth-child(2) .blog-card__link,
+  .blog__grid:has(> :nth-child(4)) > :last-child:nth-child(3n + 1) .blog-card__link,
+  .blog__grid:has(> :nth-child(4)) > :last-child:nth-child(3n + 2) .blog-card__link {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  }
+  .blog__grid:not(:has(> :nth-child(4))) > :first-child .blog-card__body,
+  .blog__grid:not(:has(> :nth-child(3))) > :nth-child(2) .blog-card__body,
+  .blog__grid:has(> :nth-child(4)) > :last-child:nth-child(3n + 1) .blog-card__body,
+  .blog__grid:has(> :nth-child(4)) > :last-child:nth-child(3n + 2) .blog-card__body {
+    justify-content: center;
+    padding: 40px;
+  }
+  .blog__grid:not(:has(> :nth-child(4))) > :first-child .blog-card__title,
+  .blog__grid:has(> :nth-child(4)) > :first-child .blog-card__title {
+    font-size: clamp(30px, 3vw, 44px);
+  }
+  .blog__grid:has(> :nth-child(4)) > :first-child .blog-card__media {
+    aspect-ratio: auto;
+    flex: 1;
+    min-height: 320px;
+  }
+}
+@media (max-width: 800px) {
+  .blog__grid,
+  .blog__grid:has(> :nth-child(4)) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .blog__grid > *,
+  .blog__grid:has(> :nth-child(4)) > * {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}
+.blog__empty {
+  font-size: 18px;
+}
+.blog__empty a {
+  color: var(--c-navy);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--c-gold);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.blog-card {
+  min-width: 0;
+}
+.blog-card__link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--bg-alt);
+  border: 1px solid var(--c-line);
+  transition: border-color 200ms ease;
+}
+.blog-card__link:hover {
+  border-color: var(--c-gold);
+}
+.blog-card__media {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--c-cream-deep);
+}
+.blog-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.blog-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+}
+.blog-card__meta,
+.post__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--c-muted);
+}
+.blog-card__meta span,
+.post__meta span {
+  color: var(--c-gold-deep);
+  font-weight: 600;
+}
+.blog-card__title {
+  font-size: 26px;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+.blog-card__excerpt {
+  margin: 0;
+  font-size: 15px;
+  color: var(--c-muted);
+  line-height: 1.5;
+}
+
+.post {
+  background: var(--c-paper);
+}
+.post__head {
+  /* Same font-size and ch measure as .post-body so the centred column shares one left edge */
+  font-size: 18px;
+  max-width: 64ch;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.post__title {
+  font-size: clamp(40px, 4.8vw, 72px);
+}
+.post__lead {
+  margin: 0;
+}
+.post__media {
+  max-width: 900px;
+  margin: 48px auto;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: var(--c-cream-deep);
+}
+.post__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post__head + .post-body {
+  margin-top: 48px;
+}
+.post-body {
+  max-width: 64ch;
+  margin-inline: auto;
+  font-size: 18px;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  color: var(--c-ink-soft);
+}
+.post-body > * + * {
+  margin-top: 24px;
+}
+.post-body h2 {
+  font-size: clamp(30px, 3vw, 44px);
+  margin-top: 56px;
+}
+.post-body h3 {
+  font-size: 24px;
+  margin-top: 40px;
+}
+.post-body p,
+.post-body ul,
+.post-body ol {
+  margin-bottom: 0;
+}
+.post-body ul,
+.post-body ol {
+  padding-left: 1.25em;
+}
+.post-body ul {
+  list-style: disc;
+}
+.post-body ol {
+  list-style: decimal;
+}
+.post-body #rank-math-toc ul {
+  list-style: none;
+  padding-left: 0;
+}
+.post-body li + li {
+  margin-top: 8px;
+}
+.post-body li::marker {
+  color: var(--c-gold-deep);
+}
+.post-body a {
+  color: var(--c-navy);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--c-gold);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: color 160ms ease;
+}
+.post-body a:hover {
+  color: var(--c-gold-deep);
+}
+.post-body figure {
+  margin-left: 0;
+  margin-right: 0;
+}
+.post-body img {
+  max-width: 100%;
+  height: auto;
+}
+.post-body figcaption {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--c-muted);
+  text-align: left;
+}
+.post-body .wp-block-table {
+  overflow-x: auto;
+}
+.post-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  line-height: 1.45;
+}
+.post-body th,
+.post-body td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--c-line);
+  text-align: left;
+  vertical-align: top;
+}
+.post-body th {
+  background: var(--c-cream);
+  font-weight: 600;
+  color: var(--c-navy);
+}
+.post-body #rank-math-toc {
+  padding: 24px;
+  background: var(--c-cream);
+  border: 1px solid var(--c-line);
+}
+.post-body #rank-math-toc h2 {
+  margin-top: 0;
+  font-family: var(--f-body);
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--c-muted);
+}
+.post-body #rank-math-toc ul {
+  margin: 12px 0 0;
+}
+.post-body #rank-math-toc a {
+  font-weight: 500;
+}
+
 /* ========== Personalización (galería) ========== */
 .pers__layout {
   display: grid;

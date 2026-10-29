@@ -8,9 +8,15 @@ test.describe("Header navigation", () => {
 
   test("desktop nav shows all main links", async ({ page }) => {
     const nav = page.locator(".hdr__nav");
-    for (const label of ["Servicios", "Sectores", "Proveedores", "Tienda", "Contacto"]) {
+    for (const label of ["Servicios", "Sectores", "Proveedores", "Tienda", "Blog", "Contacto"]) {
       await expect(nav.getByRole("link", { name: label })).toBeAttached();
     }
+  });
+
+  test("desktop nav links to the internal blog", async ({ page }) => {
+    const blog = page.locator(".hdr__nav").getByRole("link", { name: "Blog", exact: true });
+    await expect(blog).toHaveAttribute("href", "/blog/");
+    await expect(blog).not.toHaveAttribute("target", /.*/);
   });
 
   test("mobile burger button opens the drawer", async ({ page }) => {
