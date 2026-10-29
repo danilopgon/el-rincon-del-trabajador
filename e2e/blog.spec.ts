@@ -13,6 +13,15 @@ test.describe("Blog", () => {
     );
   });
 
+  test("the newest post is featured across the whole grid on desktop", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/blog/");
+
+    const grid = await page.locator(".blog__grid").boundingBox();
+    const first = await page.locator(".blog__grid > article").first().boundingBox();
+    expect(first!.width).toBeGreaterThan(grid!.width - 2);
+  });
+
   test("blog post has title, canonical and contact CTA", async ({ page }) => {
     await page.goto("/blog/");
     const href = await page.locator("main article a").first().getAttribute("href");
@@ -27,6 +36,15 @@ test.describe("Blog", () => {
     await expect(page.locator('#contacto a[href^="https://wa.me/"]')).toBeAttached();
     const jsonLd = await page.locator('script[type="application/ld+json"]').allTextContents();
     expect(jsonLd.some((text) => text.includes('"BlogPosting"'))).toBe(true);
+  });
+
+  test("blog post lists show their markers", async ({ page }) => {
+    await page.goto("/blog/");
+    const href = await page.locator("main article a").first().getAttribute("href");
+    await page.goto(href!);
+
+    const list = page.locator(".post-body > ul").first();
+    await expect(list).toHaveCSS("list-style-type", "disc");
   });
 });
 

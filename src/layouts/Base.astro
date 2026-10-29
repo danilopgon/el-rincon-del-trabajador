@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { CONTACT } from "../lib/contact";
+import { serializeJsonLd } from "../lib/jsonld";
 import CookieBanner from "../components/CookieBanner";
 import saira800Url from "@fontsource/saira-condensed/files/saira-condensed-latin-800-normal.woff2?url";
 import interTightUrl from "@fontsource-variable/inter-tight/files/inter-tight-latin-wght-normal.woff2?url";
@@ -111,7 +112,7 @@ const schema = {
         document.documentElement.classList.add("js");
       }
     </script>
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <script is:inline type="application/ld+json" set:html={serializeJsonLd(schema)} />
     <slot name="head" />
     <noscript
       ><style>

@@ -6,6 +6,7 @@ import Header from "../../components/Header";
 import WhatsAppFab from "../../components/WhatsAppFab.astro";
 import Base from "../../layouts/Base.astro";
 import { formatDate, getAllPosts, getSeo, type BlogPost } from "../../lib/blog";
+import { serializeJsonLd } from "../../lib/jsonld";
 
 export async function getStaticPaths() {
   const posts = await getAllPosts();
@@ -49,7 +50,7 @@ const schema = {
   ogType="article"
   image={post.image}
 >
-  <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <script is:inline slot="head" type="application/ld+json" set:html={serializeJsonLd(schema)} />
   <Header client:load />
   <main id="main-content">
     <article class="section post">
