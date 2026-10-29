@@ -74,6 +74,11 @@ jobs:
     environment: production
 
     steps:
+      - name: Checkout deploy scripts
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts
+
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
@@ -124,6 +129,8 @@ jobs:
           scp -o BatchMode=yes -rP "${SSH_PORT:-22}" dist/. "$SSH_USER@$SSH_HOST:$remote_tmp/"
 
       - name: Publish uploaded site
+        # scripts/publish-remote.sh syncs the upload into the docroot and keeps previous
+        # /_astro/ assets, so HTML still cached by SiteGround never points at a deleted CSS/JS.
         env:
           REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
@@ -134,6 +141,18 @@ jobs:
           test -n "$SSH_HOST"
           test -n "$SSH_USER"
           test "$REMOTE_PATH" != "/"
-          remote_tmp="${REMOTE_PATH%/}/.deploy-${GITHUB_SHA}"
           ssh -o BatchMode=yes -p "${SSH_PORT:-22}" "$SSH_USER@$SSH_HOST" \
-            "set -eu; test -n '$REMOTE_PATH'; test '$REMOTE_PATH' != '/'; test -d '$REMOTE_PATH'; test -d '$remote_tmp'; find '$REMOTE_PATH' -mindepth 1 -maxdepth 1 ! -name '.deploy-${GITHUB_SHA}' -exec rm -rf -- {} +; cp -a '$remote_tmp'/. '$REMOTE_PATH'/; rm -rf '$remote_tmp'"
+            "bash -s -- '$REMOTE_PATH' '.deploy-${GITHUB_SHA}'" < scripts/publish-remote.sh
+
+      - name: Purge SiteGround dynamic cache (best effort)
+        # Not documented by SiteGround for non-WordPress sites; it must never fail the deploy.
+        # The log shows the HTTP status so we can tell whether the purge is accepted.
+        continue-on-error: true
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          status=$(ssh -o BatchMode=yes -p "${SSH_PORT:-22}" "$SSH_USER@$SSH_HOST" \
+            "curl -s -o /dev/null -w '%{http_code}' -X PURGE -H 'Host: elrincondeltrabajador.com' 'http://127.0.0.1/*'") || true
+          echo "SiteGround cache purge answered HTTP ${status:-none}"
