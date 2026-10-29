@@ -86,6 +86,18 @@ describe("publish-remote.sh", () => {
     expect(exists(STAGING)).toBe(true);
   });
 
+  it("removes staging folders left behind by failed deploys", () => {
+    put(".deploy-failed/index.html", "half-uploaded build");
+
+    execFileSync("bash", [SCRIPT, remote, STAGING]);
+
+    expect(exists(".deploy-failed")).toBe(false);
+  });
+
+  it("does not rely on process substitution, which the host shell lacks (/dev/fd)", () => {
+    expect(readFileSync(SCRIPT, "utf8")).not.toMatch(/<\(/);
+  });
+
   it("refuses a missing staging directory", () => {
     const result = spawnSync("bash", [SCRIPT, remote, ".deploy-missing"], { encoding: "utf8" });
 
