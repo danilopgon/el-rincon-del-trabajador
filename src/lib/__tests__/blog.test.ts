@@ -160,6 +160,14 @@ describe("fetchPosts", () => {
     expect(fetchImpl.calls.some((u) => u.includes("&page=2"))).toBe(true);
   });
 
+  it("bypasses the host page cache on every request", async () => {
+    const fetchImpl = fakeFetch(() => ({ body: [], headers: { "X-WP-TotalPages": "0" } }));
+
+    await fetchPosts(fetchImpl);
+
+    expect(fetchImpl.calls[0]).toMatch(/[?&]_ts=\d+/);
+  });
+
   it("returns empty list when there are no posts", async () => {
     const fetchImpl = fakeFetch(() => ({ body: [], headers: { "X-WP-TotalPages": "0" } }));
 
@@ -205,6 +213,14 @@ describe("getSeo", () => {
     expect(fetchImpl.calls[0]).toContain(
       `rankmath/v1/getHead?url=${encodeURIComponent(post.sourceUrl)}`
     );
+  });
+
+  it("bypasses the host page cache for the Rank Math head", async () => {
+    const fetchImpl = fakeFetch(() => ({ body: { success: true, head: "" } }));
+
+    await getSeo(post, fetchImpl);
+
+    expect(fetchImpl.calls[0]).toMatch(/[?&]_ts=\d+/);
   });
 
   it("falls back when Rank Math is off", async () => {

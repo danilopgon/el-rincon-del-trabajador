@@ -124,13 +124,17 @@ export interface BlogSeo {
 const POSTS_URL = `${BLOG_ORIGIN}/wp-json/wp/v2/posts?_embed=wp:featuredmedia,wp:term&per_page=100`;
 const SEO_DESCRIPTION_MAX = 155;
 
+// SiteGround caches REST responses by full URL; a fresh query value per request makes the
+// build read what WordPress has now (a post published a minute ago, an edited Rank Math title).
+const cacheBust = () => `_ts=${Date.now()}`;
+
 const defaultFetch: FetchLike = (url) => globalThis.fetch(url);
 
 export async function fetchPosts(fetchImpl: FetchLike = defaultFetch): Promise<BlogPost[]> {
   const posts: BlogPost[] = [];
   let totalPages = 1;
   for (let page = 1; page <= totalPages; page++) {
-    const url = `${POSTS_URL}&page=${page}`;
+    const url = `${POSTS_URL}&page=${page}&${cacheBust()}`;
     let response: Response;
     try {
       response = await fetchImpl(url);
@@ -163,7 +167,7 @@ export async function getSeo(
   fetchImpl: FetchLike = defaultFetch
 ): Promise<BlogSeo> {
   const fallback = { title: post.title, description: truncate(post.excerpt, SEO_DESCRIPTION_MAX) };
-  const url = `${BLOG_ORIGIN}/wp-json/rankmath/v1/getHead?url=${encodeURIComponent(post.sourceUrl)}`;
+  const url = `${BLOG_ORIGIN}/wp-json/rankmath/v1/getHead?url=${encodeURIComponent(post.sourceUrl)}&${cacheBust()}`;
   try {
     const response = await fetchImpl(url);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
