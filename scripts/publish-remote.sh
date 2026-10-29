@@ -26,12 +26,14 @@ fi
 
 # Prune before syncing, while the new build's file list is still at hand: only assets that are
 # old AND not part of the new build go, so a file the current pages use is never removed.
+# Piped, not fed by process substitution: the host shell has no /dev/fd for it.
 if [ -d "$docroot/_astro" ]; then
-  while IFS= read -r -d '' asset; do
-    if [ ! -e "$docroot/$staging/_astro/${asset#"$docroot/_astro/"}" ]; then
-      rm -f "$asset"
-    fi
-  done < <(find "$docroot/_astro" -type f -mtime "+$max_asset_age_days" -print0)
+  find "$docroot/_astro" -type f -mtime "+$max_asset_age_days" -print0 |
+    while IFS= read -r -d '' asset; do
+      if [ ! -e "$docroot/$staging/_astro/${asset#"$docroot/_astro/"}" ]; then
+        rm -f "$asset"
+      fi
+    done
 fi
 
 # --checksum compares content, not size and mtime. --delete removes pages that no longer
@@ -42,3 +44,6 @@ rsync -a --checksum --delete \
   "$docroot/$staging/" "$docroot/"
 
 rm -rf "${docroot:?}/$staging"
+# Deploys never overlap (workflow concurrency group), so any other staging folder is
+# what a failed deploy left behind.
+find "$docroot" -mindepth 1 -maxdepth 1 -type d -name '.deploy-*' -exec rm -rf {} +
