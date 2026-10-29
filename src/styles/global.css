@@ -664,6 +664,9 @@ button {
   line-height: 1.5;
 }
 
+.post {
+  background: var(--c-paper);
+}
 .post__head {
   max-width: 68ch;
   display: flex;
@@ -693,12 +696,14 @@ button {
   margin-top: 48px;
 }
 .post-body {
-  max-width: 68ch;
+  max-width: 64ch;
   font-size: 18px;
-  line-height: 1.65;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  color: var(--c-ink-soft);
 }
 .post-body > * + * {
-  margin-top: 20px;
+  margin-top: 24px;
 }
 .post-body h2 {
   font-size: clamp(30px, 3vw, 44px);
@@ -767,13 +772,13 @@ button {
   vertical-align: top;
 }
 .post-body th {
-  background: var(--c-paper);
+  background: var(--c-cream);
   font-weight: 600;
   color: var(--c-navy);
 }
 .post-body #rank-math-toc {
   padding: 24px;
-  background: var(--c-paper);
+  background: var(--c-cream);
   border: 1px solid var(--c-line);
 }
 .post-body #rank-math-toc h2 {

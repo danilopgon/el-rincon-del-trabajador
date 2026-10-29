@@ -31,6 +31,7 @@
 /* ===== Non-Tailwind tokens (componentes / utilidades sueltas) ===== */
 :root {
   --c-line: rgba(36, 48, 63, 0.12);
+  --c-ink-soft: #3a4250;
   --c-wash: rgba(36, 48, 63, 0.07);
   --c-zebra: rgba(36, 48, 63, 0.04);
   --c-scrim: rgba(24, 31, 42, 0.52);
